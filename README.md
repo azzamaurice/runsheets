@@ -62,6 +62,7 @@ src/
 ## IDE Setup
 
 Recommended: VSCode with these extensions:
+
 - Vue - Official Vue.js extension
 - Prettier - Code formatter
 - ESLint - Linter
