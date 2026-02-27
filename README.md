@@ -4,12 +4,17 @@ A Vue 3 + TypeScript application built with Vite and Tailwind CSS v4.
 
 ## Requirements
 
-- **Node.js** >= 20.x
-- **Yarn** >= 1.22.x
+- **Node.js** 22.22.0
+- **Yarn** 4.12.0
+
+It is recommended to use [nvm](https://github.com/nvm-sh/nvm) to manage Node.js versions.
 
 ## Getting Started
 
 ```bash
+# Enable corepack (for Yarn 4.x)
+corepack enable
+
 # Install dependencies
 yarn install
 

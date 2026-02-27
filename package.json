@@ -44,5 +44,6 @@
     "*.{vue,js,ts,json,html}": [
       "prettier --write"
     ]
-  }
+  },
+  "packageManager": "yarn@4.12.0"
 }
