@@ -178,6 +178,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource-variable/jost@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@fontsource-variable/jost@npm:5.2.8"
+  checksum: 10c0/8f0a0e8182b21814220e71ebdd8d1d5d6f81a7e2ae64913b9c47a1c7c0328f18ff7d6cb778ab11121bb6c0bffeeaba2a457baf7fcaa33c6206bcaf6bddac4fa6
+  languageName: node
+  linkType: hard
+
 "@gar/promise-retry@npm:^1.0.0":
   version: 1.0.2
   resolution: "@gar/promise-retry@npm:1.0.2"
@@ -3012,6 +3019,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "runsheets@workspace:."
   dependencies:
+    "@fontsource-variable/jost": "npm:^5.2.8"
     "@phosphor-icons/vue": "npm:^2.2.1"
     "@tailwindcss/vite": "npm:^4.2.1"
     "@tanstack/query-persist-client-core": "npm:^5.92.0"

@@ -39,44 +39,50 @@ const formatTime = (time: string): string => {
         <!-- Ratio enforcer + container query context -->
         <div class="aspect-square max-h-full max-w-full w-full @container">
             <!-- Shadow wrapper: visual only, not exported -->
-            <div class="size-full rounded-[1cqw] shadow-xl overflow-hidden">
+            <div class="size-full rounded-[1cqw] shadow-xl print:shadow-none overflow-hidden">
                 <!-- Content: exported via containerEl ref -->
                 <div
                     ref="containerEl"
-                    class="size-full bg-[color-mix(in_srgb,var(--background)_80%,black)] rounded-[1cqw] p-[4cqw] gap-[4cqw] text-[2.5cqw] grid grid-cols-[1fr_5fr]"
+                    :style="{ '--item-count': items.length }"
+                    class="size-full bg-[color-mix(in_srgb,var(--background)_80%,black)] rounded-[1cqw] p-[4cqw] gap-[4cqw] text-[2.5cqw] grid grid-cols-[1fr_5fr] print:bg-transparent"
                 >
                     <div class="relative">
                         <h1
-                            class="text-[10cqw] font-bold -rotate-90 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-primary"
+                            class="text-[10cqw] font-semibold -rotate-90 absolute uppercase top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-primary"
                         >
                             {{ serviceTitle || 'Service Run Sheet' }}
                         </h1>
                     </div>
-                    <div>
-                        <p class="text-secondary mb-[3cqw]">{{ formattedDate() }}</p>
+                    <div class="flex flex-col justify-center gap-[4cqw]">
+                        <p class="text-secondary">{{ formattedDate() }}</p>
 
-                        <table class="w-full border-collapse">
-                            <thead>
-                                <tr class="border-b-[0.3cqw] border-foreground">
-                                    <th class="text-left py-[1cqw] pr-[2cqw]">Time</th>
-                                    <th class="text-left py-[1cqw] pr-[2cqw]">Item</th>
-                                    <th class="text-left py-[1cqw]">Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    v-for="(item, index) in items"
-                                    :key="index"
-                                    class="border-b-[0.15cqw] border-border"
+                        <ul class="flex flex-col gap-[calc(4cqw/max(1,var(--item-count)/6))]">
+                            <li
+                                v-for="(item, index) in items"
+                                :key="index"
+                                class="flex items-center gap-[calc(6cqw/max(1,var(--item-count)/6))]"
+                            >
+                                <div
+                                    class="font-bold opacity-75 text-[calc(4cqw/max(1,var(--item-count)/6))]"
                                 >
-                                    <td class="py-[1cqw] pr-[2cqw]">{{ formatTime(item.time) }}</td>
-                                    <td class="py-[1cqw] pr-[2cqw] font-medium">
+                                    {{ formatTime(item.time) }}
+                                </div>
+                                <div
+                                    class="flex flex-col gap-[calc(0.5cqw/max(1,var(--item-count)/6))]"
+                                >
+                                    <div
+                                        class="text-primary text-[calc(5cqw/max(1,var(--item-count)/6))] font-semibold"
+                                    >
                                         {{ item.title }}
-                                    </td>
-                                    <td class="py-[1cqw] text-secondary">{{ item.description }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </div>
+                                    <div
+                                        class="text-secondary font-medium text-[calc(3.5cqw/max(1,var(--item-count)/6))]"
+                                    >
+                                        {{ item.description }}
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
