@@ -763,6 +763,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@texel/color@npm:^1.1.11":
+  version: 1.1.11
+  resolution: "@texel/color@npm:1.1.11"
+  checksum: 10c0/f2a0976d5f9da000d76eafbb154961462897280d16984fda4d7009b230b224ad79d606b747d23099ad50e9dc07321e0d9f2dd51a1114a1cf03621c8253dc2239
+  languageName: node
+  linkType: hard
+
 "@tybys/wasm-util@npm:^0.10.1":
   version: 0.10.1
   resolution: "@tybys/wasm-util@npm:0.10.1"
@@ -1365,10 +1372,59 @@ __metadata:
   languageName: node
   linkType: hard
 
+"color-convert@npm:^3.1.3":
+  version: 3.1.3
+  resolution: "color-convert@npm:3.1.3"
+  dependencies:
+    color-name: "npm:^2.0.0"
+  checksum: 10c0/427648b442c6ea6dab5ba03f4962201ee59f128c80b25d5a0f7d9aab0ef52519a9db8a9bb3cf40b73f86eb19b5ca6aeb0ab930665f3d14973ce776d7d0448a15
+  languageName: node
+  linkType: hard
+
+"color-name@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "color-name@npm:2.1.0"
+  checksum: 10c0/9c953caba99557fce472232ded438c56b902c569cb15d66fcfbdf6374206126eef52ab66459f3984d4074b4aa8ab95e6f4b31a8e4f228dea57d0afecf94281fa
+  languageName: node
+  linkType: hard
+
+"color-string@npm:^2.1.3":
+  version: 2.1.4
+  resolution: "color-string@npm:2.1.4"
+  dependencies:
+    color-name: "npm:^2.0.0"
+  checksum: 10c0/18a9fefec153d885e0dbfb076f3a65cdcd19f52d96c719f2f261e90e5b7dafd13c51baac399d7099eac290f004d340045ab9467312dcc8afefe6f877ec5c4428
+  languageName: node
+  linkType: hard
+
+"color@npm:^5.0.3":
+  version: 5.0.3
+  resolution: "color@npm:5.0.3"
+  dependencies:
+    color-convert: "npm:^3.1.3"
+    color-string: "npm:^2.1.3"
+  checksum: 10c0/f08a03c5113ae4aa36dba9d2438596b194b897e18b961310643cb63872add1da507cd238df264eb434bbdbe3a377ec41f90d877531acca611523cfcd365db1b6
+  languageName: node
+  linkType: hard
+
+"colord@npm:^2.9.3":
+  version: 2.9.3
+  resolution: "colord@npm:2.9.3"
+  checksum: 10c0/9699e956894d8996b28c686afe8988720785f476f59335c80ce852ded76ab3ebe252703aec53d9bef54f6219aea6b960fb3d9a8300058a1d0c0d4026460cd110
+  languageName: node
+  linkType: hard
+
 "colorette@npm:^2.0.20":
   version: 2.0.20
   resolution: "colorette@npm:2.0.20"
   checksum: 10c0/e94116ff33b0ff56f3b83b9ace895e5bf87c2a7a47b3401b8c3f3226e050d5ef76cf4072fb3325f9dc24d1698f9b730baf4e05eeaf861d74a1883073f4c98a40
+  languageName: node
+  linkType: hard
+
+"colorjs.io@npm:^0.6.1":
+  version: 0.6.1
+  resolution: "colorjs.io@npm:0.6.1"
+  checksum: 10c0/972aff12d88e86726898ff110aa15ea57a0348a3b958aeb93f4d6ae2d0ca91e487864e4d0d98b53943cc3ac3f747fb01b5ba3b6d922848d5c6888cb56e470b84
   languageName: node
   linkType: hard
 
@@ -1972,13 +2028,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html2canvas@npm:^1.4.1":
-  version: 1.4.1
-  resolution: "html2canvas@npm:1.4.1"
+"html2canvas-pro@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "html2canvas-pro@npm:2.0.2"
   dependencies:
     css-line-break: "npm:^2.1.0"
     text-segmentation: "npm:^1.0.3"
-  checksum: 10c0/6de86f75762b00948edf2ea559f16da0a1ec3facc4a8a7d3f35fcec59bb0c5970463478988ae3d9082152e0173690d46ebf4082e7ac803dd4817bae1d355c0db
+  checksum: 10c0/15268678f32010437a91b65cfc8420cbba3090b5f1871e581cebcc4cce6f957126aae39b9587dd8495a728f4a3fad307b7314d289e6d593c4ea378b771a6bee0
   languageName: node
   linkType: hard
 
@@ -2898,6 +2954,7 @@ __metadata:
     "@tailwindcss/vite": "npm:^4.2.1"
     "@tanstack/query-sync-storage-persister": "npm:^5.90.23"
     "@tanstack/vue-query": "npm:^5.92.9"
+    "@texel/color": "npm:^1.1.11"
     "@types/node": "npm:^24.10.1"
     "@typescript-eslint/eslint-plugin": "npm:^8.56.1"
     "@typescript-eslint/parser": "npm:^8.56.1"
@@ -2906,11 +2963,14 @@ __metadata:
     "@vueuse/core": "npm:^14.2.1"
     axios: "npm:^1.13.6"
     class-variance-authority: "npm:^0.7.1"
+    color: "npm:^5.0.3"
+    colord: "npm:^2.9.3"
+    colorjs.io: "npm:^0.6.1"
     eslint: "npm:^10.0.2"
     eslint-plugin-prefer-arrow: "npm:^1.2.3"
     eslint-plugin-vue: "npm:^10.8.0"
     floating-vue: "npm:^5.2.2"
-    html2canvas: "npm:^1.4.1"
+    html2canvas-pro: "npm:^2.0.2"
     husky: "npm:^9.1.7"
     lint-staged: "npm:^16.2.7"
     oxlint: "npm:^1.50.0"

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, nextTick } from 'vue';
 import { cva } from 'class-variance-authority';
-import html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas-pro';
 import axios from 'axios';
 import { useQuery } from '@tanstack/vue-query';
 import { useStorage } from '@vueuse/core';
@@ -150,11 +150,20 @@ const printSheet = (): void => {
 const exportPng = async (): Promise<void> => {
     await nextTick();
     if (output.value) {
-        const canvas = await html2canvas(output.value, { scale: 2 });
-        const link = document.createElement('a');
-        link.download = `run-sheet-${serviceDate.value}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
+        const canvas = await html2canvas(output.value, {
+            scale: 2,
+            backgroundColor: '#fdfcfc',
+        });
+        canvas.toBlob(blob => {
+            if (blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.download = `run-sheet-${serviceDate.value}.png`;
+                link.href = url;
+                link.click();
+                URL.revokeObjectURL(url);
+            }
+        }, 'image/png');
     }
 };
 </script>

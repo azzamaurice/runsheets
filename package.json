@@ -16,11 +16,15 @@
     "@phosphor-icons/vue": "^2.2.1",
     "@tanstack/query-sync-storage-persister": "^5.90.23",
     "@tanstack/vue-query": "^5.92.9",
+    "@texel/color": "^1.1.11",
     "@vueuse/core": "^14.2.1",
     "axios": "^1.13.6",
     "class-variance-authority": "^0.7.1",
+    "color": "^5.0.3",
+    "colord": "^2.9.3",
+    "colorjs.io": "^0.6.1",
     "floating-vue": "^5.2.2",
-    "html2canvas": "^1.4.1",
+    "html2canvas-pro": "^2.0.2",
     "vue": "^3.5.25"
   },
   "devDependencies": {
