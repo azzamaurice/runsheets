@@ -9,13 +9,41 @@
 
 - **Vue 3** - UI framework
 - **Tailwind CSS v4** - Styling via @tailwindcss/vite
+- **shadcn-vue** - UI component library (Button, Input, Label). Components live in `src/components/ui/`
 - **class-variance-authority (cva)** - Required for conditional classes
-- **html2canvas** - PNG export functionality
+- **html2canvas-pro** - PNG export functionality (supports modern CSS color spaces)
 - **axios** - HTTP client for API calls
 - **@phosphor-icons/vue** - Icon library
 - **floating-vue** - Dropdown/popover component
 - **@vueuse/core** - Utility functions
-- **@tanstack/vue-query** - Data fetching with caching and persistence
+- **@tanstack/vue-query** - Data fetching with caching and persistence (persisted to localStorage)
+
+## shadcn-vue Components
+
+### Button (`src/components/ui/button/`)
+
+- `intent`: `primary` (default) | `secondary`
+- `variant`: `default` | `outline` | `subtle` | `text`
+- `icon`: boolean — enforces square 40px style
+- Fixed height: 40px (`h-10`)
+- Focus ring: 4px, 60% opacity
+
+### Input (`src/components/ui/input/`)
+
+- `intent`: `default` | `danger`
+- Fixed height: 40px (`h-10`)
+- Focus ring: 4px, 60% opacity
+
+### Label (`src/components/ui/label/`)
+
+- Standard label component
+
+## Theming
+
+- CSS variables defined in `src/style.css` under `:root`
+- Core vars: `--background`, `--foreground`, `--primary`, `--secondary`, `--danger`
+- No shadcn `destructive` — use `danger` everywhere
+- No custom `--radius-*` vars — use native Tailwind `rounded-*` classes
 
 ## Code Quality
 
