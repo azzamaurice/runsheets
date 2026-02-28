@@ -7,6 +7,7 @@ import Select from '@/components/ui/select/Select.vue'
 import FormControl from '@/components/ui/form-control/FormControl.vue'
 import PalettePreview from '@/components/PalettePreview.vue'
 import { usePalette } from '@/composables/usePalette'
+import { useFont } from '@/composables/useFont'
 import { COLOUR_SCHEMES } from '@/constants/colourSchemes'
 
 const DEFAULT_PALETTE: string[] = ['#152e47', '#fdfcfc', '#dc5b3d', '#38a5c5']
@@ -27,6 +28,14 @@ const {
 const displayPalette = computed((): string[] =>
     selectedPalette.value.length ? selectedPalette.value : DEFAULT_PALETTE
 )
+
+const { selectedFont, selectFont, fontOptions } = useFont()
+
+const resetAll = (): void => {
+    clearPalette()
+    selectScheme('default')
+    selectFont('jost')
+}
 
 const schemeOptions = COLOUR_SCHEMES.map(s => ({ label: s.label, value: s.value }))
 </script>
@@ -52,7 +61,7 @@ const schemeOptions = COLOUR_SCHEMES.map(s => ({ label: s.label, value: s.value 
                     <div class="flex gap-4">
                         <Button
                             variant="subtle"
-                            @click="clearPalette">
+                            @click="resetAll">
                             Reset
                         </Button>
                         <FormControl class="flex-1">
@@ -62,6 +71,12 @@ const schemeOptions = COLOUR_SCHEMES.map(s => ({ label: s.label, value: s.value 
                                 @update:model-value="selectScheme($event as string)" />
                         </FormControl>
                     </div>
+                    <FormControl>
+                        <Select
+                            :model-value="selectedFont"
+                            :options="fontOptions"
+                            @update:model-value="selectFont($event as string)" />
+                    </FormControl>
                     <div class="grid grid-cols-2 gap-2">
                         <div
                             v-for="(palette, idx) in colorPalettes"

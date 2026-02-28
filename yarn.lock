@@ -178,10 +178,66 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource-variable/dm-sans@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@fontsource-variable/dm-sans@npm:5.2.8"
+  checksum: 10c0/99971f181c343a81f72ab6d8d1354ca38bc138054e352e922a12c2be52083598446436a584b67e6e505a3e2ffdc65933c3faa290fbdb425b4768a5f4e90e12db
+  languageName: node
+  linkType: hard
+
+"@fontsource-variable/inter@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@fontsource-variable/inter@npm:5.2.8"
+  checksum: 10c0/35b46df31c8c18f55f87228acf6297e4dac6cc9f38d0faaafdaf5a40e40c386cf1bfb115fb0fe0dcdb9b7e14f582843693ccf070d9c903072a5b2fc0f8dfde56
+  languageName: node
+  linkType: hard
+
 "@fontsource-variable/jost@npm:^5.2.8":
   version: 5.2.8
   resolution: "@fontsource-variable/jost@npm:5.2.8"
   checksum: 10c0/8f0a0e8182b21814220e71ebdd8d1d5d6f81a7e2ae64913b9c47a1c7c0328f18ff7d6cb778ab11121bb6c0bffeeaba2a457baf7fcaa33c6206bcaf6bddac4fa6
+  languageName: node
+  linkType: hard
+
+"@fontsource-variable/lexend@npm:^5.2.11":
+  version: 5.2.11
+  resolution: "@fontsource-variable/lexend@npm:5.2.11"
+  checksum: 10c0/820688c298747a0161e871b1c3f5a0504dd11c59e08c9d93a37b69f49de4f27004e08325a92c81d2751175b2a40de07227d610427d3a12cbac2786dcb2063823
+  languageName: node
+  linkType: hard
+
+"@fontsource-variable/manrope@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@fontsource-variable/manrope@npm:5.2.8"
+  checksum: 10c0/3c1e9c924d3f870938d203bb19ad90322bba50f2387b9967674494fdd22f5e65a90d89310415c4b77d384811aca82b95e29635e2383d31ff4d26536ed090e91a
+  languageName: node
+  linkType: hard
+
+"@fontsource-variable/outfit@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@fontsource-variable/outfit@npm:5.2.8"
+  checksum: 10c0/0d8e3cf0153780d794c28bde93384ed22691a95c5e743489c3c43d4e4ec88d1c6e6a0684bc890bbbb04fb292e1505785636c60b3748e835375617e2af2e6c230
+  languageName: node
+  linkType: hard
+
+"@fontsource-variable/plus-jakarta-sans@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@fontsource-variable/plus-jakarta-sans@npm:5.2.8"
+  checksum: 10c0/33fcffdf8ca3f2822f9b495c7f172bfd0b6fe69832082e033924ad88cddcefb54b22d9114c641a6603782094e578a83e7d10b25086c5c2f586be51b407dbc246
+  languageName: node
+  linkType: hard
+
+"@fontsource-variable/space-grotesk@npm:^5.2.10":
+  version: 5.2.10
+  resolution: "@fontsource-variable/space-grotesk@npm:5.2.10"
+  checksum: 10c0/976123dc55a4c73d1986e0ca0c3f6210862cc48ebbec0fc4ba416f17195452e661e40504436ad4972692d34c530e1833cd5e9a0e377b4b9b062b781c6a4eeb74
+  languageName: node
+  linkType: hard
+
+"@fontsource-variable/urbanist@npm:^5.2.7":
+  version: 5.2.7
+  resolution: "@fontsource-variable/urbanist@npm:5.2.7"
+  checksum: 10c0/a4b77a3b6b0204f2a06bff385981cb3619be30f92e33a3f61e03b3a05c26f26c4deddd96edf912b405f22766c93768fcc7d1b4d7634005377dc8572384949071
   languageName: node
   linkType: hard
 
@@ -2776,7 +2832,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "runsheets@workspace:."
   dependencies:
+    "@fontsource-variable/dm-sans": "npm:^5.2.8"
+    "@fontsource-variable/inter": "npm:^5.2.8"
     "@fontsource-variable/jost": "npm:^5.2.8"
+    "@fontsource-variable/lexend": "npm:^5.2.11"
+    "@fontsource-variable/manrope": "npm:^5.2.8"
+    "@fontsource-variable/outfit": "npm:^5.2.8"
+    "@fontsource-variable/plus-jakarta-sans": "npm:^5.2.8"
+    "@fontsource-variable/space-grotesk": "npm:^5.2.10"
+    "@fontsource-variable/urbanist": "npm:^5.2.7"
     "@phosphor-icons/vue": "npm:^2.2.1"
     "@tailwindcss/vite": "npm:^4.2.1"
     "@types/node": "npm:^24.10.1"
