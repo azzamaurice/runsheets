@@ -1,5 +1,6 @@
 import { useStorage } from '@vueuse/core'
 import type { Ref } from 'vue'
+
 import type { RunSheetItem } from '@/types/runsheet'
 
 const nextId = (): number => Date.now() + Math.random()

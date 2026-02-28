@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
+import { PhCaretDown } from '@phosphor-icons/vue'
 import { useVModel } from '@vueuse/core'
 import { cva } from 'class-variance-authority'
-import { PhCaretDown } from '@phosphor-icons/vue'
+import type { HTMLAttributes } from 'vue'
+
 import { cn } from '@/lib/utils'
 
 type SelectValue = string | number | undefined | null

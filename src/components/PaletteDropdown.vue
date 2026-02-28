@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { PhCaretLeft, PhCaretRight, PhPalette } from '@phosphor-icons/vue'
 import { Dropdown } from 'floating-vue'
-import { PhPalette, PhCaretLeft, PhCaretRight } from '@phosphor-icons/vue'
-import { Button } from '@/components/ui/button'
-import Select from '@/components/ui/select/Select.vue'
-import FormControl from '@/components/ui/form-control/FormControl.vue'
+import { computed } from 'vue'
+
 import PalettePreview from '@/components/PalettePreview.vue'
-import { usePalette } from '@/composables/usePalette'
+import { Button } from '@/components/ui/button'
+import FormControl from '@/components/ui/form-control/FormControl.vue'
+import Select from '@/components/ui/select/Select.vue'
 import { useFont } from '@/composables/useFont'
+import { usePalette } from '@/composables/usePalette'
 import { COLOUR_SCHEMES } from '@/constants/colourSchemes'
 
 const DEFAULT_PALETTE: string[] = ['#152e47', '#fdfcfc', '#dc5b3d', '#38a5c5']

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { usePalette } from '@/composables/usePalette'
+
 import { useFont } from '@/composables/useFont'
+import { usePalette } from '@/composables/usePalette'
 
 const { selectedPalette } = usePalette()
 const { fontFamily } = useFont()

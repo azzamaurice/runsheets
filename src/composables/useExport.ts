@@ -1,5 +1,6 @@
-import { ref, nextTick } from 'vue'
 import html2canvas from 'html2canvas-pro'
+import { nextTick, ref } from 'vue'
+
 import { useRunsheet } from '@/composables/useRunsheet'
 
 const outputEl = ref<HTMLElement | null>(null)

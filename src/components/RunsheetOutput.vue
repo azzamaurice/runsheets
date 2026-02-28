@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useRunsheet } from '@/composables/useRunsheet'
+import { onMounted, ref } from 'vue'
+
+import logo from '@/assets/logo.svg?raw'
 import { useExport } from '@/composables/useExport'
+import { useRunsheet } from '@/composables/useRunsheet'
 
 const { serviceTitle, serviceDate, items } = useRunsheet()
 const { outputEl } = useExport()
@@ -50,12 +52,15 @@ const formatTime = (time: string): string => {
                         </h1>
                     </div>
                     <div class="flex flex-col justify-center gap-[4cqw]">
-                        <p
-                            class="text-secondary text-[calc(6cqw/max(1,var(--item-count)/5))] font-semibold">
+                        <div
+                            class="text-secondary flex items-center justify-between text-[calc(6cqw/max(1,var(--item-count)/5))] font-semibold">
                             {{ formattedDate() }}
-                        </p>
+                            <div
+                                v-html="logo"
+                                class="[&>svg]:size-[calc(6cqw/max(1,var(--item-count)/5))]" />
+                        </div>
 
-                        <ul class="flex flex-col gap-[calc(4cqw/max(1,var(--item-count)/5))]">
+                        <ul class="flex flex-col gap-[calc(3cqw/max(1,var(--item-count)/5))]">
                             <li
                                 v-for="(item, index) in items"
                                 :key="index"

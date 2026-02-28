@@ -34,6 +34,7 @@
     "vue": "^3.5.25"
   },
   "devDependencies": {
+    "@prettier/plugin-xml": "^3.4.2",
     "@tailwindcss/vite": "^4.2.1",
     "@types/node": "^24.10.1",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
@@ -42,6 +43,7 @@
     "@vue/tsconfig": "^0.8.1",
     "eslint": "^10.0.2",
     "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-vue": "^10.8.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",

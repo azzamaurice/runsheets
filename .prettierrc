@@ -9,13 +9,19 @@
     "bracketSameLine": true,
     "singleAttributePerLine": true,
     "vueIndentScriptAndStyle": false,
-    "plugins": ["prettier-plugin-tailwindcss"],
+    "plugins": ["prettier-plugin-tailwindcss", "@prettier/plugin-xml"],
     "tailwindFunctions": ["cva", "cn"],
     "overrides": [
         {
             "files": "*.json",
             "options": {
                 "tabWidth": 2
+            }
+        },
+        {
+            "files": "*.svg",
+            "options": {
+                "xmlWhitespaceSensitivity": "ignore"
             }
         }
     ]
