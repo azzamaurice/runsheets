@@ -11,7 +11,6 @@ defineProps<{
             :key="idx"
             class="size-10 flex-1"
             :style="{ backgroundColor: color }"
-            :title="color"
-        />
+            :title="color" />
     </div>
 </template>

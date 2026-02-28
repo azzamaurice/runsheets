@@ -44,12 +44,10 @@ const formatTime = (time: string): string => {
                 <div
                     ref="containerEl"
                     :style="{ '--item-count': items.length }"
-                    class="grid size-full grid-cols-[1fr_5fr] gap-[4cqw] rounded-[1cqw] bg-[color-mix(in_srgb,var(--background)_80%,black)] p-[4cqw] text-[2.5cqw] print:bg-transparent"
-                >
+                    class="grid size-full grid-cols-[1fr_5fr] gap-[4cqw] rounded-[1cqw] bg-[color-mix(in_srgb,var(--background)_80%,black)] p-[4cqw] text-[2.5cqw] print:bg-transparent">
                     <div class="relative">
                         <h1
-                            class="text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 text-[10cqw] font-semibold whitespace-nowrap uppercase"
-                        >
+                            class="text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 text-[10cqw] font-semibold whitespace-nowrap uppercase">
                             {{ serviceTitle || 'Service Run Sheet' }}
                         </h1>
                     </div>
@@ -60,25 +58,20 @@ const formatTime = (time: string): string => {
                             <li
                                 v-for="(item, index) in items"
                                 :key="index"
-                                class="flex items-center gap-[calc(6cqw/max(1,var(--item-count)/5))]"
-                            >
+                                class="flex items-center gap-[calc(6cqw/max(1,var(--item-count)/5))]">
                                 <div
-                                    class="text-[calc(4cqw/max(1,var(--item-count)/5))] font-bold opacity-75"
-                                >
+                                    class="text-[calc(4cqw/max(1,var(--item-count)/5))] font-bold opacity-75">
                                     {{ formatTime(item.time) }}
                                 </div>
                                 <div
-                                    class="flex flex-col gap-[calc(0.5cqw/max(1,var(--item-count)/5))]"
-                                >
+                                    class="flex flex-col gap-[calc(0.5cqw/max(1,var(--item-count)/5))]">
                                     <div
-                                        class="text-primary text-[calc(5cqw/max(1,var(--item-count)/5))] font-semibold"
-                                    >
+                                        class="text-primary text-[calc(5cqw/max(1,var(--item-count)/5))] font-semibold">
                                         {{ item.title }}
                                     </div>
                                     <div
                                         v-if="!!item.description"
-                                        class="text-secondary text-[calc(3.5cqw/max(1,var(--item-count)/5))] font-medium"
-                                    >
+                                        class="text-secondary text-[calc(3.5cqw/max(1,var(--item-count)/5))] font-medium">
                                         {{ item.description }}
                                     </div>
                                 </div>

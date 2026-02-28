@@ -13,33 +13,27 @@ const { colorPalettes, isFetching, fetchColors, selectedPalette, selectPalette }
         <PalettePreview
             v-if="selectedPalette.length"
             :palette="selectedPalette"
-            class="ring-primary/50 ring"
-        />
+            class="ring-primary/50 ring" />
 
         <Dropdown
             theme="bare"
-            :overflow-padding="16"
-        >
+            :overflow-padding="16">
             <Button icon>
                 <PhPalette
                     weight="duotone"
-                    :size="20"
-                />
+                    :size="20" />
             </Button>
             <template #popper>
                 <div
-                    class="text-foreground border-border w-80 space-y-3 rounded-lg border bg-[color-mix(in_srgb,var(--background)_80%,black)] p-3"
-                >
+                    class="text-foreground border-border w-80 space-y-3 rounded-lg border bg-[color-mix(in_srgb,var(--background)_80%,black)] p-3">
                     <Button
                         class="w-full"
                         :disabled="isFetching"
-                        @click="fetchColors()"
-                    >
+                        @click="fetchColors()">
                         <PhCircleNotch
                             v-if="isFetching"
                             :size="16"
-                            class="animate-spin"
-                        />
+                            class="animate-spin" />
                         {{ isFetching ? 'Fetching...' : 'Get Colors' }}
                     </Button>
                     <div v-if="colorPalettes?.length">
@@ -48,8 +42,7 @@ const { colorPalettes, isFetching, fetchColors, selectedPalette, selectPalette }
                                 v-for="(palette, idx) in colorPalettes"
                                 :key="idx"
                                 class="hover:ring-ring cursor-pointer overflow-hidden rounded-lg hover:ring-2"
-                                @click="selectPalette(palette)"
-                            >
+                                @click="selectPalette(palette)">
                                 <PalettePreview :palette />
                             </div>
                         </div>

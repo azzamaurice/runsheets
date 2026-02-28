@@ -48,8 +48,7 @@ const handlePrint = (): void => window.print()
 <template>
     <div class="flex flex-col gap-4 print:block">
         <div
-            class="rounded-lg bg-[color-mix(in_srgb,var(--background)_80%,black)] p-6 shadow-md print:hidden"
-        >
+            class="rounded-lg bg-[color-mix(in_srgb,var(--background)_80%,black)] p-6 shadow-md print:hidden">
             <div class="mb-4">
                 <Label for="service-title">Service Title</Label>
                 <Input
@@ -57,8 +56,7 @@ const handlePrint = (): void => window.print()
                     v-model="serviceTitle"
                     type="text"
                     placeholder="e.g. Sunday Morning Service"
-                    class="mt-1"
-                />
+                    class="mt-1" />
             </div>
 
             <div class="mb-6">
@@ -67,8 +65,7 @@ const handlePrint = (): void => window.print()
                     id="service-date"
                     v-model="serviceDate"
                     type="date"
-                    class="mt-1"
-                />
+                    class="mt-1" />
             </div>
 
             <hr class="border-border my-6" />
@@ -86,8 +83,7 @@ const handlePrint = (): void => window.print()
                     draggable
                     @dragstart="onDragStart(index, $event)"
                     @dragover.prevent="onDragOver(index)"
-                    @dragend="onDragEnd"
-                >
+                    @dragend="onDragEnd">
                     <span
                         class="text-foreground/50 hover:text-foreground mt-2 cursor-grab"
                         title="Drag to reorder"
@@ -105,8 +101,7 @@ const handlePrint = (): void => window.print()
                                 :model-value="item.time"
                                 type="time"
                                 class="mt-1 w-full min-w-0"
-                                @update:model-value="updateItem(index, 'time', $event as string)"
-                            />
+                                @update:model-value="updateItem(index, 'time', $event as string)" />
                         </div>
                         <div>
                             <Label
@@ -120,8 +115,9 @@ const handlePrint = (): void => window.print()
                                 type="text"
                                 placeholder="e.g. Worship Set"
                                 class="mt-1"
-                                @update:model-value="updateItem(index, 'title', $event as string)"
-                            />
+                                @update:model-value="
+                                    updateItem(index, 'title', $event as string)
+                                " />
                         </div>
                         <div>
                             <Label
@@ -137,8 +133,7 @@ const handlePrint = (): void => window.print()
                                 class="mt-1"
                                 @update:model-value="
                                     updateItem(index, 'description', $event as string)
-                                "
-                            />
+                                " />
                         </div>
                     </div>
                     <Button
@@ -147,12 +142,10 @@ const handlePrint = (): void => window.print()
                         icon
                         :disabled="items.length <= 1"
                         class="mt-auto shrink-0"
-                        @click="removeItem(index)"
-                    >
+                        @click="removeItem(index)">
                         <PhMinus
                             weight="bold"
-                            :size="16"
-                        />
+                            :size="16" />
                     </Button>
                 </div>
             </div>
@@ -160,12 +153,10 @@ const handlePrint = (): void => window.print()
             <Button
                 variant="subtle"
                 class="mt-4 w-full"
-                @click="addItem"
-            >
+                @click="addItem">
                 <PhPlus
                     :size="16"
-                    weight="bold"
-                />
+                    weight="bold" />
                 Add Item
             </Button>
 

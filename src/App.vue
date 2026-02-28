@@ -8,8 +8,7 @@ import ThemeOverride from '@/components/ThemeOverride.vue'
 <template>
     <div class="bg-background text-foreground flex min-h-screen flex-col">
         <header
-            class="bg-background sticky top-0 z-10 flex items-center justify-between px-4 py-3 print:hidden"
-        >
+            class="bg-background sticky top-0 z-10 flex items-center justify-between px-4 py-3 print:hidden">
             <h1 class="text-xl font-bold">Runsheets</h1>
             <PaletteDropdown />
         </header>

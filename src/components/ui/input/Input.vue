@@ -40,6 +40,5 @@ const inputStyles = cva(
     <input
         v-model="modelValue"
         data-slot="input"
-        :class="cn(inputStyles({ intent }), props.class)"
-    />
+        :class="cn(inputStyles({ intent }), props.class)" />
 </template>
