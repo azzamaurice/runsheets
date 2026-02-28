@@ -63,7 +63,12 @@ const handlePrint = (): void => window.print()
 
             <div class="mb-6">
                 <Label for="service-date">Date</Label>
-                <Input id="service-date" v-model="serviceDate" type="date" class="mt-1" />
+                <Input
+                    id="service-date"
+                    v-model="serviceDate"
+                    type="date"
+                    class="mt-1"
+                />
             </div>
 
             <hr class="border-border my-6" />
@@ -90,7 +95,11 @@ const handlePrint = (): void => window.print()
                     >
                     <div class="grid min-w-0 flex-1 grid-cols-1 gap-3 sm:grid-cols-3">
                         <div class="min-w-0">
-                            <Label :for="`time-${item.id}`" class="text-xs">Start Time</Label>
+                            <Label
+                                :for="`time-${item.id}`"
+                                class="text-xs"
+                                >Start Time</Label
+                            >
                             <Input
                                 :id="`time-${item.id}`"
                                 :model-value="item.time"
@@ -100,7 +109,11 @@ const handlePrint = (): void => window.print()
                             />
                         </div>
                         <div>
-                            <Label :for="`title-${item.id}`" class="text-xs">Title</Label>
+                            <Label
+                                :for="`title-${item.id}`"
+                                class="text-xs"
+                                >Title</Label
+                            >
                             <Input
                                 :id="`title-${item.id}`"
                                 :model-value="item.title"
@@ -111,7 +124,11 @@ const handlePrint = (): void => window.print()
                             />
                         </div>
                         <div>
-                            <Label :for="`desc-${item.id}`" class="text-xs">Description</Label>
+                            <Label
+                                :for="`desc-${item.id}`"
+                                class="text-xs"
+                                >Description</Label
+                            >
                             <Input
                                 :id="`desc-${item.id}`"
                                 :model-value="item.description"
@@ -132,22 +149,45 @@ const handlePrint = (): void => window.print()
                         class="mt-auto shrink-0"
                         @click="removeItem(index)"
                     >
-                        <PhMinus weight="bold" :size="16" />
+                        <PhMinus
+                            weight="bold"
+                            :size="16"
+                        />
                     </Button>
                 </div>
             </div>
 
-            <Button variant="subtle" class="mt-4 w-full" @click="addItem">
-                <PhPlus :size="16" weight="bold" />
+            <Button
+                variant="subtle"
+                class="mt-4 w-full"
+                @click="addItem"
+            >
+                <PhPlus
+                    :size="16"
+                    weight="bold"
+                />
                 Add Item
             </Button>
 
             <hr class="border-border my-6" />
 
             <div class="flex gap-4">
-                <Button variant="outline" @click="reset">Reset</Button>
-                <Button class="flex-1" @click="handlePrint">Print</Button>
-                <Button intent="secondary" class="flex-1" @click="exportPng">Export PNG</Button>
+                <Button
+                    variant="outline"
+                    @click="reset"
+                    >Reset</Button
+                >
+                <Button
+                    class="flex-1"
+                    @click="handlePrint"
+                    >Print</Button
+                >
+                <Button
+                    intent="secondary"
+                    class="flex-1"
+                    @click="exportPng"
+                    >Export PNG</Button
+                >
             </div>
         </div>
     </div>

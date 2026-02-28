@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { VueQueryPlugin, QueryClient } from '@tanstack/vue-query'
 import { persistQueryClient } from '@tanstack/query-persist-client-core'
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
+import FloatingVue from 'floating-vue'
 import '@fontsource-variable/jost'
 import 'floating-vue/dist/style.css'
 import './style.css'
@@ -24,5 +25,10 @@ persistQueryClient({
     queryClient,
     persister
 })
+
+FloatingVue.options.themes['bare'] = {
+    $extend: 'dropdown',
+    $resetCss: true
+}
 
 createApp(App).use(VueQueryPlugin, { queryClient }).mount('#app')

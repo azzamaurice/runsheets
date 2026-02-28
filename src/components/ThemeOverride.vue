@@ -29,5 +29,9 @@ const css = computed((): string => {
 </script>
 
 <template>
-    <component :is="'style'" v-if="css">{{ css }}</component>
+    <component
+        :is="'style'"
+        v-if="css"
+        >{{ css }}</component
+    >
 </template>
