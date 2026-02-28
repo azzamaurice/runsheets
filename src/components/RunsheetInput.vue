@@ -56,7 +56,7 @@ const handlePrint = (): void => window.print();
 <template>
     <div class="flex flex-col gap-4 overflow-auto print:block">
         <div
-            class="bg-[color-mix(in_srgb,var(--background)_90%,black)] rounded-lg shadow-md p-6 print:hidden"
+            class="bg-[color-mix(in_srgb,var(--background)_80%,black)] rounded-lg shadow-md p-6 print:hidden"
         >
             <div class="mb-4">
                 <Label for="service-title">Service Title</Label>

@@ -34,28 +34,52 @@ const formatTime = (time: string): string => {
 </script>
 
 <template>
-    <div
-        ref="containerEl"
-        class="bg-[color-mix(in_srgb,var(--background)_90%,black)] rounded-lg shadow-md p-8 overflow-auto"
-    >
-        <h1 class="text-2xl font-bold mb-2">{{ serviceTitle || 'Service Run Sheet' }}</h1>
-        <p class="text-secondary mb-6">{{ formattedDate() }}</p>
+    <!-- Outer: takes grid space, centers the ratio box -->
+    <div class="h-full overflow-hidden">
+        <!-- Ratio enforcer + container query context -->
+        <div class="aspect-square max-h-full max-w-full w-full @container">
+            <!-- Shadow wrapper: visual only, not exported -->
+            <div class="size-full rounded-[1cqw] shadow-xl overflow-hidden">
+                <!-- Content: exported via containerEl ref -->
+                <div
+                    ref="containerEl"
+                    class="size-full bg-[color-mix(in_srgb,var(--background)_80%,black)] rounded-[1cqw] p-[4cqw] gap-[4cqw] text-[2.5cqw] grid grid-cols-[1fr_5fr]"
+                >
+                    <div class="relative">
+                        <h1
+                            class="text-[10cqw] font-bold -rotate-90 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-primary"
+                        >
+                            {{ serviceTitle || 'Service Run Sheet' }}
+                        </h1>
+                    </div>
+                    <div>
+                        <p class="text-secondary mb-[3cqw]">{{ formattedDate() }}</p>
 
-        <table class="w-full border-collapse">
-            <thead>
-                <tr class="border-b-2 border-foreground">
-                    <th class="text-left py-2 pr-4">Time</th>
-                    <th class="text-left py-2 pr-4">Item</th>
-                    <th class="text-left py-2">Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(item, index) in items" :key="index" class="border-b border-border">
-                    <td class="py-2 pr-4">{{ formatTime(item.time) }}</td>
-                    <td class="py-2 pr-4 font-medium">{{ item.title }}</td>
-                    <td class="py-2 text-secondary">{{ item.description }}</td>
-                </tr>
-            </tbody>
-        </table>
+                        <table class="w-full border-collapse">
+                            <thead>
+                                <tr class="border-b-[0.3cqw] border-foreground">
+                                    <th class="text-left py-[1cqw] pr-[2cqw]">Time</th>
+                                    <th class="text-left py-[1cqw] pr-[2cqw]">Item</th>
+                                    <th class="text-left py-[1cqw]">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="(item, index) in items"
+                                    :key="index"
+                                    class="border-b-[0.15cqw] border-border"
+                                >
+                                    <td class="py-[1cqw] pr-[2cqw]">{{ formatTime(item.time) }}</td>
+                                    <td class="py-[1cqw] pr-[2cqw] font-medium">
+                                        {{ item.title }}
+                                    </td>
+                                    <td class="py-[1cqw] text-secondary">{{ item.description }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
