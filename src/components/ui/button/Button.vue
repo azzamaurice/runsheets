@@ -10,6 +10,7 @@ interface Props extends PrimitiveProps {
     intent?: ButtonVariants['intent']
     variant?: ButtonVariants['variant']
     icon?: boolean
+    type?: 'button' | 'submit' | 'reset'
     class?: HTMLAttributes['class']
 }
 
@@ -17,7 +18,8 @@ const props = withDefaults(defineProps<Props>(), {
     as: 'button',
     intent: 'primary',
     variant: 'default',
-    icon: false
+    icon: false,
+    type: 'button'
 })
 </script>
 
@@ -26,6 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
         data-slot="button"
         :as
         :as-child
+        :type
         :class="cn(buttonVariants({ intent, variant, icon }), props.class)">
         <slot />
     </Primitive>

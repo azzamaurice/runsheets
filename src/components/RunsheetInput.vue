@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { cva } from 'class-variance-authority'
-import { PhMinus, PhPlus } from '@phosphor-icons/vue'
+import { PhDownload, PhEraser, PhMinus, PhPlus, PhPrinter } from '@phosphor-icons/vue'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import FormControl from '@/components/ui/form-control/FormControl.vue'
 import { useRunsheet } from '@/composables/useRunsheet'
 import { useExport } from '@/composables/useExport'
 
@@ -49,24 +50,22 @@ const handlePrint = (): void => window.print()
     <div class="flex flex-col gap-4 print:block">
         <div
             class="rounded-lg bg-[color-mix(in_srgb,var(--background)_80%,black)] p-6 shadow-md print:hidden">
-            <div class="mb-4">
+            <FormControl class="mb-4">
                 <Label for="service-title">Service Title</Label>
                 <Input
                     id="service-title"
                     v-model="serviceTitle"
                     type="text"
-                    placeholder="e.g. Sunday Morning Service"
-                    class="mt-1" />
-            </div>
+                    placeholder="e.g. Sunday Morning Service" />
+            </FormControl>
 
-            <div class="mb-6">
+            <FormControl class="mb-6">
                 <Label for="service-date">Date</Label>
                 <Input
                     id="service-date"
                     v-model="serviceDate"
-                    type="date"
-                    class="mt-1" />
-            </div>
+                    type="date" />
+            </FormControl>
 
             <hr class="border-border my-6" />
 
@@ -90,51 +89,37 @@ const handlePrint = (): void => window.print()
                         >⠿</span
                     >
                     <div class="grid min-w-0 flex-1 grid-cols-1 gap-3 sm:grid-cols-3">
-                        <div class="min-w-0">
-                            <Label
-                                :for="`time-${item.id}`"
-                                class="text-xs"
-                                >Start Time</Label
-                            >
+                        <FormControl class="min-w-0">
+                            <Label :for="`time-${item.id}`">Start Time</Label>
                             <Input
                                 :id="`time-${item.id}`"
                                 :model-value="item.time"
                                 type="time"
-                                class="mt-1 w-full min-w-0"
+                                class="w-full min-w-0"
                                 @update:model-value="updateItem(index, 'time', $event as string)" />
-                        </div>
-                        <div>
-                            <Label
-                                :for="`title-${item.id}`"
-                                class="text-xs"
-                                >Title</Label
-                            >
+                        </FormControl>
+                        <FormControl>
+                            <Label :for="`title-${item.id}`">Title</Label>
                             <Input
                                 :id="`title-${item.id}`"
                                 :model-value="item.title"
                                 type="text"
                                 placeholder="e.g. Worship Set"
-                                class="mt-1"
                                 @update:model-value="
                                     updateItem(index, 'title', $event as string)
                                 " />
-                        </div>
-                        <div>
-                            <Label
-                                :for="`desc-${item.id}`"
-                                class="text-xs"
-                                >Description</Label
-                            >
+                        </FormControl>
+                        <FormControl>
+                            <Label :for="`desc-${item.id}`">Description</Label>
                             <Input
                                 :id="`desc-${item.id}`"
                                 :model-value="item.description"
                                 type="text"
                                 placeholder="e.g. Led by worship team"
-                                class="mt-1"
                                 @update:model-value="
                                     updateItem(index, 'description', $event as string)
                                 " />
-                        </div>
+                        </FormControl>
                     </div>
                     <Button
                         intent="primary"
@@ -164,21 +149,28 @@ const handlePrint = (): void => window.print()
 
             <div class="flex gap-4">
                 <Button
-                    variant="outline"
-                    @click="reset"
-                    >Reset</Button
-                >
-                <Button
-                    class="flex-1"
-                    @click="handlePrint"
-                    >Print</Button
-                >
+                    variant="subtle"
+                    @click="reset">
+                    <PhEraser
+                        weight="duotone"
+                        :size="20" />
+                    Reset
+                </Button>
+                <Button @click="handlePrint">
+                    <PhPrinter
+                        weight="duotone"
+                        :size="20" />
+                    Print
+                </Button>
                 <Button
                     intent="secondary"
                     class="flex-1"
-                    @click="exportPng"
-                    >Export PNG</Button
-                >
+                    @click="exportPng">
+                    <PhDownload
+                        weight="duotone"
+                        :size="20" />
+                    Save
+                </Button>
             </div>
         </div>
     </div>

@@ -9,6 +9,7 @@ export const usePalette = (): {
     fetchColors: () => void
     selectedPalette: Ref<string[]>
     selectPalette: (palette: string[]) => void
+    clearPalette: () => void
 } => {
     const {
         data: colorPalettes,
@@ -19,26 +20,26 @@ export const usePalette = (): {
         queryFn: async (): Promise<string[][]> => {
             const res = await axios.post('https://api.huemint.com/color', {
                 mode: 'transformer',
-                num_colors: 4,
                 temperature: '1.3',
+                num_colors: 4,
                 num_results: 10,
                 adjacency: [
+                    0,
+                    '75',
+                    '45',
+                    '45',
+                    '75',
+                    0,
                     '0',
-                    '80',
-                    '55',
-                    '55',
-                    '80',
                     '0',
-                    '35',
-                    '35',
-                    '55',
-                    '35',
+                    '45',
                     '0',
-                    '35',
-                    '55',
-                    '35',
-                    '35',
-                    '0'
+                    0,
+                    '50',
+                    '45',
+                    '0',
+                    '50',
+                    0
                 ],
                 palette: ['-', '-', '-', '-']
             })
@@ -58,5 +59,9 @@ export const usePalette = (): {
         selectedPalette.value = palette
     }
 
-    return { colorPalettes, isFetching, fetchColors, selectedPalette, selectPalette }
+    const clearPalette = (): void => {
+        selectedPalette.value = []
+    }
+
+    return { colorPalettes, isFetching, fetchColors, selectedPalette, selectPalette, clearPalette }
 }
