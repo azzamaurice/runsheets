@@ -1,13 +1,13 @@
 import type { Ref } from 'vue'
 
-export interface RunSheetItem {
+interface RunSheetItem {
     id: number
     time: string
     title: string
     description: string
 }
 
-export interface UseRunsheetReturn {
+interface UseRunsheetReturn {
     serviceTitle: Ref<string>
     serviceDate: Ref<string>
     items: Ref<RunSheetItem[]>
@@ -16,3 +16,5 @@ export interface UseRunsheetReturn {
     updateItem: (index: number, field: keyof RunSheetItem, value: string) => void
     reset: () => void
 }
+
+export type { RunSheetItem, UseRunsheetReturn }

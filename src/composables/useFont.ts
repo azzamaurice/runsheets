@@ -100,7 +100,7 @@ const selectFont = (value: string): void => {
     selectedFont.value = value
 }
 
-export const useFont = (): UseFontReturn => {
+const useFont = (): UseFontReturn => {
     return {
         selectedFont,
         selectFont,
@@ -108,3 +108,5 @@ export const useFont = (): UseFontReturn => {
         fontFamily
     }
 }
+
+export { useFont }

@@ -7,7 +7,7 @@ import type { UseExportReturn } from '@/types/export'
 
 const outputEl = ref<HTMLElement | null>(null)
 
-export const useExport = (): UseExportReturn => {
+const useExport = (): UseExportReturn => {
     const { serviceDate } = useRunsheet()
 
     const exportPng = async (): Promise<void> => {
@@ -80,3 +80,5 @@ export const useExport = (): UseExportReturn => {
 
     return { outputEl, exportPng }
 }
+
+export { useExport }

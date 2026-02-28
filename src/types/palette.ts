@@ -1,10 +1,10 @@
 import type { Ref } from 'vue'
 
-export interface PaletteModule {
+interface PaletteModule {
     default: string[][]
 }
 
-export interface UsePaletteReturn {
+interface UsePaletteReturn {
     colorPalettes: Ref<string[][]>
     isLoading: Ref<boolean>
     selectedPalette: Ref<string[]>
@@ -17,3 +17,5 @@ export interface UsePaletteReturn {
     nextPage: () => void
     prevPage: () => void
 }
+
+export type { PaletteModule, UsePaletteReturn }

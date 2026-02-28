@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority'
 
 export { default as Button } from './Button.vue'
 
-export const buttonVariants = cva(
+const buttonVariants = cva(
     'focus-visible:ring-ring/60 inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-md px-4 text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-4 disabled:pointer-events-none disabled:opacity-50',
     {
         variants: {
@@ -64,4 +64,7 @@ export const buttonVariants = cva(
     }
 )
 
-export type ButtonVariants = VariantProps<typeof buttonVariants>
+type ButtonVariants = VariantProps<typeof buttonVariants>
+
+export { buttonVariants }
+export type { ButtonVariants }

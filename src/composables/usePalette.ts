@@ -88,7 +88,7 @@ const selectScheme = (value: string): void => {
     selectedScheme.value = value
 }
 
-export const usePalette = (): UsePaletteReturn => {
+const usePalette = (): UsePaletteReturn => {
     return {
         colorPalettes,
         isLoading,
@@ -103,3 +103,5 @@ export const usePalette = (): UsePaletteReturn => {
         prevPage
     }
 }
+
+export { usePalette }

@@ -11,7 +11,7 @@ const items = useStorage<RunSheetItem[]>('runsheet-items', [
     { id: nextId(), time: '18:00', title: '', description: '' }
 ])
 
-export const useRunsheet = (): UseRunsheetReturn => {
+const useRunsheet = (): UseRunsheetReturn => {
     const nextTime = (): string => {
         const last = items.value[items.value.length - 1]
         if (!last?.time) return ''
@@ -44,3 +44,5 @@ export const useRunsheet = (): UseRunsheetReturn => {
 
     return { serviceTitle, serviceDate, items, addItem, removeItem, updateItem, reset }
 }
+
+export { useRunsheet }

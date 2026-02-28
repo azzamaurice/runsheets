@@ -37,7 +37,15 @@ export default [
             'prefer-arrow-callback': 2,
             'prefer-arrow/prefer-arrow-functions': 2,
             'simple-import-sort/imports': 2,
-            'simple-import-sort/exports': 2
+            'simple-import-sort/exports': 2,
+            'no-restricted-syntax': [
+                2,
+                {
+                    selector: 'ExportNamedDeclaration[declaration]',
+                    message:
+                        'Do not use inline exports. Declare without export and add a grouped export { ... } at the end of the file.'
+                }
+            ]
         }
     },
     {
@@ -77,6 +85,14 @@ export default [
             'prefer-arrow/prefer-arrow-functions': 2,
             'simple-import-sort/imports': 2,
             'simple-import-sort/exports': 2,
+            'no-restricted-syntax': [
+                2,
+                {
+                    selector: 'ExportNamedDeclaration[declaration]',
+                    message:
+                        'Do not use inline exports. Declare without export and add a grouped export { ... } at the end of the file.'
+                }
+            ],
             'vue/multi-word-component-names': 0,
             'vue/v-bind-style': [2, 'shorthand', { sameNameShorthand: 'always' }]
         }

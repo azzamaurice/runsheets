@@ -1,6 +1,8 @@
 import type { Ref } from 'vue'
 
-export interface UseExportReturn {
+interface UseExportReturn {
     outputEl: Ref<HTMLElement | null>
     exportPng: () => Promise<void>
 }
+
+export type { UseExportReturn }

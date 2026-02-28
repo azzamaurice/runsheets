@@ -62,6 +62,7 @@
 - **Arrow functions only** — no `function` declarations anywhere
 - **No inferred types** — all variables, parameters and return types must be explicitly typed
 - **Named interfaces over inline object types** — never use inline object types (e.g. `{ label: string; value: string }`). Always extract them into a named `interface` in `src/types/`. The only exception is Vue's `defineProps`/`defineEmits` compiler macros
+- **Grouped exports at end of file** — never use `export` inline on declarations (e.g. `export const`, `export interface`). Instead, declare without `export` and add a single `export { ... }` (or `export type { ... }`) block at the end of the file. Re-exports like `export { default as Button } from './Button.vue'` in barrel files are exempt
 - **Lodash everywhere** — always use lodash utility methods instead of native JS equivalents (e.g. `map` over `Array.map`, `filter` over `Array.filter`, `find` over `Array.find`, `cloneDeep` over structuredClone, `debounce` over custom debounce, etc.). Always use named imports: `import { map, filter, find } from 'lodash'`
 - **Lodash chain for multiple operations** — when applying 2+ lodash methods in sequence on the same data, always use `chain(data).method1().method2().value()` instead of nesting calls or intermediate variables. Import chain as `import { chain } from 'lodash'`
 
