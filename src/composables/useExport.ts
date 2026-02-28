@@ -4,8 +4,6 @@ import { useRunsheet } from '@/composables/useRunsheet'
 
 const outputEl = ref<HTMLElement | null>(null)
 
-const EXPORT_SIZE = 1200
-
 export const useExport = (): {
     outputEl: typeof outputEl
     exportPng: () => Promise<void>
@@ -16,60 +14,52 @@ export const useExport = (): {
         await nextTick()
         if (!outputEl.value) return
 
-        // Create a fixed-size off-screen container so cqw units resolve
-        // at a canonical size regardless of the device viewport
-        const wrapper = document.createElement('div')
-        wrapper.style.position = 'fixed'
-        wrapper.style.top = '-99999px'
-        wrapper.style.left = '-99999px'
-        wrapper.style.width = `${EXPORT_SIZE}px`
-        wrapper.style.height = `${EXPORT_SIZE}px`
-        wrapper.style.containerType = 'inline-size'
-        document.body.appendChild(wrapper)
+        const { offsetWidth, offsetHeight } = outputEl.value
 
         const clone = outputEl.value.cloneNode(true) as HTMLElement
-        clone.style.width = `${EXPORT_SIZE}px`
-        clone.style.height = `${EXPORT_SIZE}px`
+        clone.style.position = 'fixed'
+        clone.style.top = '-99999px'
+        clone.style.left = '-99999px'
+        clone.style.width = `${offsetWidth}px`
+        clone.style.height = `${offsetHeight}px`
         clone.style.borderRadius = '0'
-        wrapper.appendChild(clone)
+        document.body.appendChild(clone)
 
-        // Copy computed styles so colours resolve correctly
+        // Copy all computed styles recursively so cqw/container-relative
+        // values are frozen as resolved pixels regardless of viewport
         const allOriginal = Array.from(outputEl.value.querySelectorAll('*')) as HTMLElement[]
         const allCloned = Array.from(clone.querySelectorAll('*')) as HTMLElement[]
-        clone.style.backgroundColor = window.getComputedStyle(outputEl.value).backgroundColor
 
+        const copyStyles = (orig: HTMLElement, cloned: HTMLElement): void => {
+            const cs = window.getComputedStyle(orig)
+            for (let i = 0; i < cs.length; i++) {
+                const prop = cs[i]
+                if (prop) {
+                    try {
+                        cloned.style.setProperty(prop, cs.getPropertyValue(prop))
+                    } catch {
+                        // ignore read-only or invalid props
+                    }
+                }
+            }
+        }
+
+        copyStyles(outputEl.value, clone)
         allOriginal.forEach((orig, i) => {
             const cloned = allCloned[i]
-            if (!cloned) return
-            const cs = window.getComputedStyle(orig)
-            ;[
-                'color',
-                'background-color',
-                'border-color',
-                'border-top-color',
-                'border-bottom-color',
-                'border-left-color',
-                'border-right-color',
-                'font-weight',
-                'font-family'
-            ].forEach(prop => {
-                const val = cs.getPropertyValue(prop)
-                if (val) cloned.style.setProperty(prop, val)
-            })
+            if (cloned) copyStyles(orig, cloned)
         })
-
-        await nextTick()
 
         const canvas = await html2canvas(clone, {
             scale: 2,
-            width: EXPORT_SIZE,
-            height: EXPORT_SIZE,
+            width: offsetWidth,
+            height: offsetHeight,
             backgroundColor: null,
             useCORS: true,
             logging: false
         })
 
-        document.body.removeChild(wrapper)
+        document.body.removeChild(clone)
 
         canvas.toBlob(blob => {
             if (!blob) return

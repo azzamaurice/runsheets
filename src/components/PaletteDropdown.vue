@@ -12,8 +12,8 @@ const { colorPalettes, isFetching, fetchColors, selectedPalette, selectPalette }
     <div class="flex items-center gap-4">
         <PalettePreview v-if="selectedPalette.length" :palette="selectedPalette" />
         <Dropdown>
-            <Button :icon="true">
-                <PhPalette :size="20" />
+            <Button icon>
+                <PhPalette weight="duotone" :size="20" />
             </Button>
             <template #popper>
                 <div

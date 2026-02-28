@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { cva } from 'class-variance-authority'
+import { PhMinus, PhPlus } from '@phosphor-icons/vue'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -19,15 +20,6 @@ const itemRowStyles = cva(
         variants: {
             dragging: { true: 'opacity-40' },
             dragOver: { true: 'ring-ring ring-2' }
-        }
-    }
-)
-
-const removeButtonStyles = cva(
-    'text-danger hover:text-danger/70 mt-2 text-xl leading-none transition-opacity',
-    {
-        variants: {
-            disabled: { true: 'cursor-not-allowed opacity-30' }
         }
     }
 )
@@ -86,7 +78,7 @@ const handlePrint = (): void => window.print()
                             dragOver: dragOverIndex === index && dragIndex !== index
                         })
                     "
-                    draggable="true"
+                    draggable
                     @dragstart="onDragStart(index, $event)"
                     @dragover.prevent="onDragOver(index)"
                     @dragend="onDragEnd"
@@ -96,14 +88,14 @@ const handlePrint = (): void => window.print()
                         title="Drag to reorder"
                         >⠿</span
                     >
-                    <div class="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-3">
-                        <div>
+                    <div class="grid min-w-0 flex-1 grid-cols-1 gap-3 sm:grid-cols-3">
+                        <div class="min-w-0">
                             <Label :for="`time-${item.id}`" class="text-xs">Start Time</Label>
                             <Input
                                 :id="`time-${item.id}`"
                                 :model-value="item.time"
                                 type="time"
-                                class="mt-1"
+                                class="mt-1 w-full min-w-0"
                                 @update:model-value="updateItem(index, 'time', $event as string)"
                             />
                         </div>
@@ -132,18 +124,22 @@ const handlePrint = (): void => window.print()
                             />
                         </div>
                     </div>
-                    <button
-                        :class="removeButtonStyles({ disabled: items.length <= 1 })"
+                    <Button
+                        intent="primary"
+                        variant="subtle"
+                        icon
                         :disabled="items.length <= 1"
+                        class="mt-auto shrink-0"
                         @click="removeItem(index)"
                     >
-                        −
-                    </button>
+                        <PhMinus weight="bold" :size="16" />
+                    </Button>
                 </div>
             </div>
 
-            <Button variant="outline" class="mt-4 w-full border-dashed" @click="addItem">
-                + Add Item
+            <Button variant="subtle" class="mt-4 w-full" @click="addItem">
+                <PhPlus :size="16" weight="bold" />
+                Add Item
             </Button>
 
             <hr class="border-border my-6" />
