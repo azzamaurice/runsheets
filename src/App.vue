@@ -76,18 +76,18 @@ const { data: colorPalettes, refetch: fetchColors } = useQuery({
 
 const selectedPalette = useStorage<string[]>('selected-palette', []);
 
-function selectPalette(palette: string[]): void {
+const selectPalette = (palette: string[]): void => {
     selectedPalette.value = palette;
-}
+};
 
 const items = ref<RunSheetItem[]>([{ id: nextId(), time: '09:00', title: '', description: '' }]);
 
 const dragIndex = ref<number | null>(null);
 const dragOverIndex = ref<number | null>(null);
 
-function nextId(): number {
+const nextId = (): number => {
     return Date.now() + Math.random();
-}
+};
 
 const formattedDate = computed(() => {
     if (!serviceDate.value) return '';
@@ -100,33 +100,33 @@ const formattedDate = computed(() => {
     });
 });
 
-function formatTime(time: string): string {
+const formatTime = (time: string): string => {
     if (!time) return '';
     const [h, m] = time.split(':');
     const hour = parseInt(h ?? '0');
     const ampm = hour >= 12 ? 'PM' : 'AM';
     const h12 = hour % 12 || 12;
     return `${h12}:${m} ${ampm}`;
-}
+};
 
-function addItem(): void {
+const addItem = (): void => {
     items.value.push({ id: nextId(), time: '', title: '', description: '' });
-}
+};
 
-function removeItem(index: number): void {
+const removeItem = (index: number): void => {
     if (items.value.length > 1) {
         items.value.splice(index, 1);
     }
-}
+};
 
-function onDragStart(index: number, event: DragEvent) {
+const onDragStart = (index: number, event: DragEvent): void => {
     dragIndex.value = index;
     if (event.dataTransfer) {
         event.dataTransfer.effectAllowed = 'move';
     }
-}
+};
 
-function onDragOver(index: number) {
+const onDragOver = (index: number): void => {
     if (dragIndex.value === null || dragIndex.value === index) return;
     const dragged = items.value.splice(dragIndex.value, 1)[0];
     if (dragged) {
@@ -134,18 +134,18 @@ function onDragOver(index: number) {
     }
     dragIndex.value = index;
     dragOverIndex.value = index;
-}
+};
 
-function onDragEnd() {
+const onDragEnd = (): void => {
     dragIndex.value = null;
     dragOverIndex.value = null;
-}
+};
 
-function printSheet() {
+const printSheet = (): void => {
     window.print();
-}
+};
 
-async function exportPng() {
+const exportPng = async (): Promise<void> => {
     await nextTick();
     if (output.value) {
         const canvas = await html2canvas(output.value, { scale: 2 });
@@ -154,7 +154,7 @@ async function exportPng() {
         link.href = canvas.toDataURL('image/png');
         link.click();
     }
-}
+};
 </script>
 
 <script lang="ts">

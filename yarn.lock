@@ -1548,6 +1548,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-prefer-arrow@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "eslint-plugin-prefer-arrow@npm:1.2.3"
+  peerDependencies:
+    eslint: ">=2.0.0"
+  checksum: 10c0/9fd463ae0a8b80f216bee947783813b565d1859583e82b7f72f8853931be7cf6297209610f8e4bdc0b7e5459328b6f0030eab695964d3662ef1939eaada2e86e
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-vue@npm:^10.8.0":
   version: 10.8.0
   resolution: "eslint-plugin-vue@npm:10.8.0"
@@ -2898,6 +2907,7 @@ __metadata:
     axios: "npm:^1.13.6"
     class-variance-authority: "npm:^0.7.1"
     eslint: "npm:^10.0.2"
+    eslint-plugin-prefer-arrow: "npm:^1.2.3"
     eslint-plugin-vue: "npm:^10.8.0"
     floating-vue: "npm:^5.2.2"
     html2canvas: "npm:^1.4.1"

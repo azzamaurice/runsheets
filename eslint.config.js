@@ -2,6 +2,7 @@ import eslintPluginVue from 'eslint-plugin-vue';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
 import vueParser from 'vue-eslint-parser';
+import preferArrow from 'eslint-plugin-prefer-arrow';
 
 export default [
     {
@@ -22,14 +23,17 @@ export default [
         },
         plugins: {
             '@typescript-eslint': tseslint,
+            'prefer-arrow': preferArrow,
         },
         rules: {
-            'no-console': 'warn',
-            'no-debugger': 'warn',
-            'no-unused-vars': 'off',
-            '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-            '@typescript-eslint/no-explicit-any': 'warn',
-            'prefer-arrow-callback': 'error',
+            'no-console': 1,
+            'no-debugger': 1,
+            'no-unused-vars': 0,
+            '@typescript-eslint/no-unused-vars': [2, { argsIgnorePattern: '^_' }],
+            '@typescript-eslint/no-explicit-any': 1,
+            '@typescript-eslint/no-inferrable-types': 2,
+            'prefer-arrow-callback': 2,
+            'prefer-arrow/prefer-arrow-functions': 2,
         },
     },
     {
@@ -51,16 +55,19 @@ export default [
         plugins: {
             vue: eslintPluginVue,
             '@typescript-eslint': tseslint,
+            'prefer-arrow': preferArrow,
         },
         rules: {
-            'no-console': 'warn',
-            'no-debugger': 'warn',
-            'no-unused-vars': 'off',
-            '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-            '@typescript-eslint/no-explicit-any': 'warn',
-            'prefer-arrow-callback': 'error',
-            'vue/multi-word-component-names': 'off',
-            'vue/no-v-html': 'off',
+            'no-console': 1,
+            'no-debugger': 1,
+            'no-unused-vars': 0,
+            '@typescript-eslint/no-unused-vars': [2, { argsIgnorePattern: '^_' }],
+            '@typescript-eslint/no-explicit-any': 1,
+            '@typescript-eslint/no-inferrable-types': 2,
+            'prefer-arrow-callback': 2,
+            'prefer-arrow/prefer-arrow-functions': 2,
+            'vue/multi-word-component-names': 0,
+            'vue/no-v-html': 0,
         },
     },
     {
