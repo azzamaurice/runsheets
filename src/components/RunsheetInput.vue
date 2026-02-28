@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { cva } from 'class-variance-authority'
-import { PhDownload, PhEraser, PhMinus, PhPlus, PhPrinter } from '@phosphor-icons/vue'
+import {
+    PhDotsSixVertical,
+    PhDownload,
+    PhEraser,
+    PhMinus,
+    PhPlus,
+    PhPrinter
+} from '@phosphor-icons/vue'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -22,6 +29,8 @@ const itemRowStyles = cva('bg-background-body flex items-start gap-2 rounded-md 
     }
 })
 
+// --- Desktop (HTML5 Drag & Drop) ---
+
 const onDragStart = (index: number, event: DragEvent): void => {
     dragIndex.value = index
     if (event.dataTransfer) event.dataTransfer.effectAllowed = 'move'
@@ -36,6 +45,40 @@ const onDragOver = (index: number): void => {
 }
 
 const onDragEnd = (): void => {
+    dragIndex.value = null
+    dragOverIndex.value = null
+}
+
+// --- Mobile (Touch events) ---
+
+const getRowIndexFromPoint = (x: number, y: number): number | null => {
+    const el = document.elementFromPoint(x, y)
+    if (!el) return null
+    const row = (el as HTMLElement).closest<HTMLElement>('[data-index]')
+    if (!row) return null
+    const idx = parseInt(row.dataset.index ?? '', 10)
+    return Number.isNaN(idx) ? null : idx
+}
+
+const onTouchStart = (index: number, event: TouchEvent): void => {
+    const touch: Touch | undefined = event.touches[0]
+    if (!touch) return
+    dragIndex.value = index
+}
+
+const onTouchMove = (event: TouchEvent): void => {
+    if (dragIndex.value === null) return
+    const touch: Touch | undefined = event.touches[0]
+    if (!touch) return
+    const targetIndex: number | null = getRowIndexFromPoint(touch.clientX, touch.clientY)
+    if (targetIndex === null || targetIndex === dragIndex.value) return
+    const dragged = items.value.splice(dragIndex.value, 1)[0]
+    if (dragged) items.value.splice(targetIndex, 0, dragged)
+    dragIndex.value = targetIndex
+    dragOverIndex.value = targetIndex
+}
+
+const onTouchEnd = (): void => {
     dragIndex.value = null
     dragOverIndex.value = null
 }
@@ -69,21 +112,27 @@ const handlePrint = (): void => window.print()
                 <div
                     v-for="(item, index) in items"
                     :key="item.id"
+                    :data-index="index"
                     :class="
                         itemRowStyles({
                             dragging: dragIndex === index,
                             dragOver: dragOverIndex === index && dragIndex !== index
                         })
                     "
-                    draggable
-                    @dragstart="onDragStart(index, $event)"
                     @dragover.prevent="onDragOver(index)"
                     @dragend="onDragEnd">
                     <span
-                        class="text-foreground/50 hover:text-foreground mt-2 cursor-grab"
+                        class="text-foreground/50 hover:text-foreground flex size-10 shrink-0 cursor-grab touch-none items-center justify-center self-center select-none"
                         title="Drag to reorder"
-                        >⠿</span
-                    >
+                        draggable="true"
+                        @dragstart="onDragStart(index, $event)"
+                        @touchstart="onTouchStart(index, $event)"
+                        @touchmove.prevent="onTouchMove($event)"
+                        @touchend="onTouchEnd">
+                        <PhDotsSixVertical
+                            weight="bold"
+                            :size="20" />
+                    </span>
                     <div class="grid min-w-0 flex-1 grid-cols-1 gap-3 sm:grid-cols-3">
                         <FormControl class="min-w-0">
                             <Label :for="`time-${item.id}`">Start Time</Label>
