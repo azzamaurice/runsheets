@@ -2,6 +2,10 @@
 import { ref, computed, nextTick } from 'vue';
 import { cva } from 'class-variance-authority';
 import html2canvas from 'html2canvas';
+import axios from 'axios';
+import { useQuery } from '@tanstack/vue-query';
+import { useStorage } from '@vueuse/core';
+import { PhPalette } from '@phosphor-icons/vue';
 
 interface RunSheetItem {
     id: number;
@@ -36,12 +40,52 @@ const serviceTitle = ref('');
 const serviceDate = ref(new Date().toISOString().slice(0, 10));
 const output = ref<HTMLElement | null>(null);
 
+const { data: colorPalettes, refetch: fetchColors } = useQuery({
+    queryKey: ['colors'],
+    queryFn: async () => {
+        const res = await axios.post('https://api.huemint.com/color', {
+            mode: 'transformer',
+            num_colors: 4,
+            temperature: '1.3',
+            num_results: 10,
+            adjacency: [
+                '0',
+                '80',
+                '55',
+                '55',
+                '80',
+                '0',
+                '35',
+                '35',
+                '55',
+                '35',
+                '0',
+                '35',
+                '55',
+                '35',
+                '35',
+                '0',
+            ],
+            palette: ['-', '-', '-', '-'],
+        });
+        return res.data.results.map((r: { palette: string[] }) => r.palette);
+    },
+    staleTime: Infinity,
+    enabled: false,
+});
+
+const selectedPalette = useStorage<string[]>('selected-palette', []);
+
+function selectPalette(palette: string[]): void {
+    selectedPalette.value = palette;
+}
+
 const items = ref<RunSheetItem[]>([{ id: nextId(), time: '09:00', title: '', description: '' }]);
 
 const dragIndex = ref<number | null>(null);
 const dragOverIndex = ref<number | null>(null);
 
-function nextId() {
+function nextId(): number {
     return Date.now() + Math.random();
 }
 
@@ -56,7 +100,7 @@ const formattedDate = computed(() => {
     });
 });
 
-function formatTime(time: string) {
+function formatTime(time: string): string {
     if (!time) return '';
     const [h, m] = time.split(':');
     const hour = parseInt(h ?? '0');
@@ -65,11 +109,11 @@ function formatTime(time: string) {
     return `${h12}:${m} ${ampm}`;
 }
 
-function addItem() {
+function addItem(): void {
     items.value.push({ id: nextId(), time: '', title: '', description: '' });
 }
 
-function removeItem(index: number) {
+function removeItem(index: number): void {
     if (items.value.length > 1) {
         items.value.splice(index, 1);
     }
@@ -113,12 +157,66 @@ async function exportPng() {
 }
 </script>
 
+<script lang="ts">
+import { Dropdown } from 'floating-vue';
+</script>
+
 <template>
     <div
         class="absolute inset-0 flex flex-col md:grid md:grid-cols-2 md:grid-rows-[auto_1fr] gap-4 p-4"
     >
         <header class="md:col-span-2 flex items-center justify-between p-4 print:hidden">
             <h1>Runsheets</h1>
+            <div class="flex items-center gap-2">
+                <div
+                    v-if="selectedPalette.length"
+                    class="flex rounded-lg overflow-hidden shadow-md"
+                >
+                    <div
+                        v-for="(color, idx) in selectedPalette"
+                        :key="idx"
+                        class="w-8 h-8"
+                        :style="{ backgroundColor: color }"
+                        :title="color"
+                    ></div>
+                </div>
+                <Dropdown>
+                    <button
+                        class="p-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                    >
+                        <PhPalette :size="20" />
+                    </button>
+                    <template #popper>
+                        <div class="w-80 p-3 space-y-3">
+                            <button
+                                @click="fetchColors()"
+                                class="w-full px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                            >
+                                Get Colors
+                            </button>
+                            <div v-if="colorPalettes?.length">
+                                <p class="text-xs text-gray-500 mb-2">Saved Palettes</p>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div
+                                        v-for="(palette, idx) in colorPalettes ?? []"
+                                        :key="idx"
+                                        class="flex rounded-lg overflow-hidden shadow-sm cursor-pointer hover:ring-2 hover:ring-purple-500"
+                                        @click="selectPalette(palette)"
+                                    >
+                                        <div
+                                            v-for="(color, cIdx) in palette"
+                                            :key="cIdx"
+                                            class="flex-1 h-8"
+                                            :style="{ backgroundColor: color }"
+                                            :title="color"
+                                        ></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </Dropdown>
+            </div>
         </header>
 
         <div class="flex flex-col gap-4 overflow-auto print:block">
@@ -257,11 +355,3 @@ async function exportPng() {
         </div>
     </div>
 </template>
-
-<style scoped>
-@media print {
-    :deep(.print\:hidden) {
-        display: none !important;
-    }
-}
-</style>

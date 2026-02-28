@@ -29,6 +29,7 @@ export default [
             'no-unused-vars': 'off',
             '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
             '@typescript-eslint/no-explicit-any': 'warn',
+            'prefer-arrow-callback': 'error',
         },
     },
     {
@@ -57,6 +58,7 @@ export default [
             'no-unused-vars': 'off',
             '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
             '@typescript-eslint/no-explicit-any': 'warn',
+            'prefer-arrow-callback': 'error',
             'vue/multi-word-component-names': 'off',
             'vue/no-v-html': 'off',
         },
