@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { usePalette } from '@/composables/usePalette';
+import { computed } from 'vue'
+import { usePalette } from '@/composables/usePalette'
 
-const { selectedPalette } = usePalette();
+const { selectedPalette } = usePalette()
 
 const isLight = (hex: string): boolean => {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-    return luminance > 0.5;
-};
+    const r = parseInt(hex.slice(1, 3), 16)
+    const g = parseInt(hex.slice(3, 5), 16)
+    const b = parseInt(hex.slice(5, 7), 16)
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+    return luminance > 0.5
+}
 
 const css = computed((): string => {
-    const [background, foreground, primary, secondary] = selectedPalette.value;
-    if (!background || !foreground || !primary || !secondary) return '';
-    const primaryForeground = isLight(primary) ? '#111111' : '#fdfcfc';
-    const secondaryForeground = isLight(secondary) ? '#111111' : '#fdfcfc';
+    const [background, foreground, primary, secondary] = selectedPalette.value
+    if (!background || !foreground || !primary || !secondary) return ''
+    const primaryForeground = isLight(primary) ? '#111111' : '#fdfcfc'
+    const secondaryForeground = isLight(secondary) ? '#111111' : '#fdfcfc'
     return `:root {
     --background: ${background};
     --foreground: ${foreground};
@@ -24,8 +24,8 @@ const css = computed((): string => {
     --primary-foreground: ${primaryForeground};
     --secondary: ${secondary};
     --secondary-foreground: ${secondaryForeground};
-}`;
-});
+}`
+})
 </script>
 
 <template>

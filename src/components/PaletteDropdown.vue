@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { Dropdown } from 'floating-vue';
-import { PhPalette, PhCircleNotch } from '@phosphor-icons/vue';
-import { Button } from '@/components/ui/button';
-import PalettePreview from '@/components/PalettePreview.vue';
-import { usePalette } from '@/composables/usePalette';
+import { Dropdown } from 'floating-vue'
+import { PhPalette, PhCircleNotch } from '@phosphor-icons/vue'
+import { Button } from '@/components/ui/button'
+import PalettePreview from '@/components/PalettePreview.vue'
+import { usePalette } from '@/composables/usePalette'
 
-const { colorPalettes, isFetching, fetchColors, selectedPalette, selectPalette } = usePalette();
+const { colorPalettes, isFetching, fetchColors, selectedPalette, selectPalette } = usePalette()
 </script>
 
 <template>

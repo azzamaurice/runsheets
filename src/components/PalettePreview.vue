@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
-    palette: string[];
-}>();
+    palette: string[]
+}>()
 </script>
 
 <template>

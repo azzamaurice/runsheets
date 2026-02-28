@@ -1,36 +1,36 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRunsheet } from '@/composables/useRunsheet';
-import { useExport } from '@/composables/useExport';
+import { ref, onMounted } from 'vue'
+import { useRunsheet } from '@/composables/useRunsheet'
+import { useExport } from '@/composables/useExport'
 
-const { serviceTitle, serviceDate, items } = useRunsheet();
-const { outputEl } = useExport();
+const { serviceTitle, serviceDate, items } = useRunsheet()
+const { outputEl } = useExport()
 
-const containerEl = ref<HTMLElement | null>(null);
+const containerEl = ref<HTMLElement | null>(null)
 
 onMounted(() => {
-    outputEl.value = containerEl.value;
-});
+    outputEl.value = containerEl.value
+})
 
 const formattedDate = (): string => {
-    if (!serviceDate.value) return '';
-    const d = new Date(serviceDate.value + 'T00:00:00');
+    if (!serviceDate.value) return ''
+    const d = new Date(serviceDate.value + 'T00:00:00')
     return d.toLocaleDateString('en-AU', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
-        day: 'numeric',
-    });
-};
+        day: 'numeric'
+    })
+}
 
 const formatTime = (time: string): string => {
-    if (!time) return '';
-    const [h, m] = time.split(':');
-    const hour = parseInt(h ?? '0');
-    const ampm = hour >= 12 ? 'PM' : 'AM';
-    const h12 = hour % 12 || 12;
-    return `${h12}:${m} ${ampm}`;
-};
+    if (!time) return ''
+    const [h, m] = time.split(':')
+    const hour = parseInt(h ?? '0')
+    const ampm = hour >= 12 ? 'PM' : 'AM'
+    const h12 = hour % 12 || 12
+    return `${h12}:${m} ${ampm}`
+}
 </script>
 
 <template>

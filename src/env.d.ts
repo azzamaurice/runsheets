@@ -1,1 +1,1 @@
-declare module '@fontsource-variable/jost';
+declare module '@fontsource-variable/jost'

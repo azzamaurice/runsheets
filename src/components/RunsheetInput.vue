@@ -1,56 +1,56 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { cva } from 'class-variance-authority';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useRunsheet } from '@/composables/useRunsheet';
-import { useExport } from '@/composables/useExport';
+import { ref } from 'vue'
+import { cva } from 'class-variance-authority'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { useRunsheet } from '@/composables/useRunsheet'
+import { useExport } from '@/composables/useExport'
 
-const { serviceTitle, serviceDate, items, addItem, removeItem, updateItem, reset } = useRunsheet();
-const { exportPng } = useExport();
+const { serviceTitle, serviceDate, items, addItem, removeItem, updateItem, reset } = useRunsheet()
+const { exportPng } = useExport()
 
-const dragIndex = ref<number | null>(null);
-const dragOverIndex = ref<number | null>(null);
+const dragIndex = ref<number | null>(null)
+const dragOverIndex = ref<number | null>(null)
 
 const itemRowStyles = cva(
     'flex items-start gap-2 p-3 bg-[color-mix(in_srgb,var(--background)_85%,black)] rounded-md',
     {
         variants: {
             dragging: { true: 'opacity-40' },
-            dragOver: { true: 'ring-2 ring-ring' },
-        },
+            dragOver: { true: 'ring-2 ring-ring' }
+        }
     }
-);
+)
 
 const removeButtonStyles = cva(
     'mt-2 text-danger hover:text-danger/70 text-xl leading-none transition-opacity',
     {
         variants: {
-            disabled: { true: 'opacity-30 cursor-not-allowed' },
-        },
+            disabled: { true: 'opacity-30 cursor-not-allowed' }
+        }
     }
-);
+)
 
 const onDragStart = (index: number, event: DragEvent): void => {
-    dragIndex.value = index;
-    if (event.dataTransfer) event.dataTransfer.effectAllowed = 'move';
-};
+    dragIndex.value = index
+    if (event.dataTransfer) event.dataTransfer.effectAllowed = 'move'
+}
 
 const onDragOver = (index: number): void => {
-    if (dragIndex.value === null || dragIndex.value === index) return;
-    const dragged = items.value.splice(dragIndex.value, 1)[0];
-    if (dragged) items.value.splice(index, 0, dragged);
-    dragIndex.value = index;
-    dragOverIndex.value = index;
-};
+    if (dragIndex.value === null || dragIndex.value === index) return
+    const dragged = items.value.splice(dragIndex.value, 1)[0]
+    if (dragged) items.value.splice(index, 0, dragged)
+    dragIndex.value = index
+    dragOverIndex.value = index
+}
 
 const onDragEnd = (): void => {
-    dragIndex.value = null;
-    dragOverIndex.value = null;
-};
+    dragIndex.value = null
+    dragOverIndex.value = null
+}
 
-const handlePrint = (): void => window.print();
+const handlePrint = (): void => window.print()
 </script>
 
 <template>
@@ -83,7 +83,7 @@ const handlePrint = (): void => window.print();
                     :class="
                         itemRowStyles({
                             dragging: dragIndex === index,
-                            dragOver: dragOverIndex === index && dragIndex !== index,
+                            dragOver: dragOverIndex === index && dragIndex !== index
                         })
                     "
                     draggable="true"

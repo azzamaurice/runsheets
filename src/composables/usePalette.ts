@@ -1,19 +1,19 @@
-import axios from 'axios';
-import { useQuery } from '@tanstack/vue-query';
-import { useStorage } from '@vueuse/core';
-import type { Ref } from 'vue';
+import axios from 'axios'
+import { useQuery } from '@tanstack/vue-query'
+import { useStorage } from '@vueuse/core'
+import type { Ref } from 'vue'
 
 export const usePalette = (): {
-    colorPalettes: Ref<string[][] | undefined>;
-    isFetching: Ref<boolean>;
-    fetchColors: () => void;
-    selectedPalette: Ref<string[]>;
-    selectPalette: (palette: string[]) => void;
+    colorPalettes: Ref<string[][] | undefined>
+    isFetching: Ref<boolean>
+    fetchColors: () => void
+    selectedPalette: Ref<string[]>
+    selectPalette: (palette: string[]) => void
 } => {
     const {
         data: colorPalettes,
         refetch,
-        isFetching,
+        isFetching
     } = useQuery({
         queryKey: ['colors'],
         queryFn: async (): Promise<string[][]> => {
@@ -38,25 +38,25 @@ export const usePalette = (): {
                     '55',
                     '35',
                     '35',
-                    '0',
+                    '0'
                 ],
-                palette: ['-', '-', '-', '-'],
-            });
-            return res.data.results.map((r: { palette: string[] }) => r.palette);
+                palette: ['-', '-', '-', '-']
+            })
+            return res.data.results.map((r: { palette: string[] }) => r.palette)
         },
         staleTime: Infinity,
-        enabled: false,
-    });
+        enabled: false
+    })
 
-    const selectedPalette = useStorage<string[]>('selected-palette', []);
+    const selectedPalette = useStorage<string[]>('selected-palette', [])
 
     const fetchColors = (): void => {
-        refetch();
-    };
+        refetch()
+    }
 
     const selectPalette = (palette: string[]): void => {
-        selectedPalette.value = palette;
-    };
+        selectedPalette.value = palette
+    }
 
-    return { colorPalettes, isFetching, fetchColors, selectedPalette, selectPalette };
-};
+    return { colorPalettes, isFetching, fetchColors, selectedPalette, selectPalette }
+}

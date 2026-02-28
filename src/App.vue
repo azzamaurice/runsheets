@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import PaletteDropdown from '@/components/PaletteDropdown.vue';
-import RunsheetInput from '@/components/RunsheetInput.vue';
-import RunsheetOutput from '@/components/RunsheetOutput.vue';
-import ThemeOverride from '@/components/ThemeOverride.vue';
+import PaletteDropdown from '@/components/PaletteDropdown.vue'
+import RunsheetInput from '@/components/RunsheetInput.vue'
+import RunsheetOutput from '@/components/RunsheetOutput.vue'
+import ThemeOverride from '@/components/ThemeOverride.vue'
 </script>
 
 <template>
