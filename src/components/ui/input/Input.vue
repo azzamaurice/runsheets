@@ -25,7 +25,7 @@ const inputStyles = cva(
     {
         variants: {
             intent: {
-                default: 'border-border focus-visible:border-ring',
+                default: 'border-border focus-visible:border-foreground',
                 danger: 'border-danger focus-visible:ring-danger/60'
             }
         },

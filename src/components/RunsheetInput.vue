@@ -15,15 +15,12 @@ const { exportPng } = useExport()
 const dragIndex = ref<number | null>(null)
 const dragOverIndex = ref<number | null>(null)
 
-const itemRowStyles = cva(
-    'flex items-start gap-2 rounded-md bg-[color-mix(in_srgb,var(--background)_85%,black)] p-3',
-    {
-        variants: {
-            dragging: { true: 'opacity-40' },
-            dragOver: { true: 'ring-ring ring-2' }
-        }
+const itemRowStyles = cva('bg-background-body flex items-start gap-2 rounded-md p-3', {
+    variants: {
+        dragging: { true: 'opacity-40' },
+        dragOver: { true: 'ring-ring ring-2' }
     }
-)
+})
 
 const onDragStart = (index: number, event: DragEvent): void => {
     dragIndex.value = index
@@ -48,8 +45,7 @@ const handlePrint = (): void => window.print()
 
 <template>
     <div class="flex flex-col gap-4 print:block">
-        <div
-            class="rounded-lg bg-[color-mix(in_srgb,var(--background)_80%,black)] p-6 shadow-md print:hidden">
+        <div class="bg-background rounded-lg p-6 shadow-md print:hidden">
             <FormControl class="mb-4">
                 <Label for="service-title">Service Title</Label>
                 <Input

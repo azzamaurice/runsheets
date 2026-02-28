@@ -48,7 +48,7 @@ const schemeOptions = COLOUR_SCHEMES.map(s => ({ label: s.label, value: s.value 
 
             <template #popper>
                 <div
-                    class="text-foreground border-border w-80 space-y-3 rounded-lg border bg-[color-mix(in_srgb,var(--background)_80%,black)] p-3">
+                    class="text-foreground border-border bg-background w-80 space-y-3 rounded-lg border p-3">
                     <div class="flex gap-4">
                         <Button
                             variant="subtle"
@@ -66,7 +66,7 @@ const schemeOptions = COLOUR_SCHEMES.map(s => ({ label: s.label, value: s.value 
                         <div
                             v-for="(palette, idx) in colorPalettes"
                             :key="idx"
-                            class="hover:ring-ring cursor-pointer overflow-hidden rounded-lg hover:ring-2"
+                            class="ring-primary/50 hover:ring-primary/60 cursor-pointer overflow-hidden rounded-lg ring hover:ring-4"
                             @click="selectPalette(palette)">
                             <PalettePreview :palette />
                         </div>

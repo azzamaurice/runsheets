@@ -44,7 +44,7 @@ const formatTime = (time: string): string => {
                 <div
                     ref="containerEl"
                     :style="{ '--item-count': items.length }"
-                    class="grid size-full grid-cols-[1fr_5fr] gap-[4cqw] rounded-[1cqw] bg-[color-mix(in_srgb,var(--background)_80%,black)] p-[4cqw] text-[2.5cqw] print:bg-transparent">
+                    class="bg-background grid size-full grid-cols-[1fr_5fr] gap-[4cqw] rounded-[1cqw] p-[4cqw] text-[2.5cqw] print:bg-transparent">
                     <div class="relative">
                         <h1
                             class="text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 text-[10cqw] font-semibold whitespace-nowrap uppercase">
@@ -52,7 +52,10 @@ const formatTime = (time: string): string => {
                         </h1>
                     </div>
                     <div class="flex flex-col justify-center gap-[4cqw]">
-                        <p class="text-secondary">{{ formattedDate() }}</p>
+                        <p
+                            class="text-secondary text-[calc(3cqw/max(1,var(--item-count)/5))] font-semibold">
+                            {{ formattedDate() }}
+                        </p>
 
                         <ul class="flex flex-col gap-[calc(4cqw/max(1,var(--item-count)/5))]">
                             <li
