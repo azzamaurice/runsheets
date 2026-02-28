@@ -24,8 +24,8 @@ const props = withDefaults(defineProps<Props>(), {
 <template>
     <Primitive
         data-slot="button"
-        :as="as"
-        :as-child="asChild"
+        :as
+        :as-child
         :class="cn(buttonVariants({ intent, variant, icon }), props.class)"
     >
         <slot />

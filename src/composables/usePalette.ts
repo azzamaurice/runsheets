@@ -5,11 +5,16 @@ import type { Ref } from 'vue';
 
 export const usePalette = (): {
     colorPalettes: Ref<string[][] | undefined>;
+    isFetching: Ref<boolean>;
     fetchColors: () => void;
     selectedPalette: Ref<string[]>;
     selectPalette: (palette: string[]) => void;
 } => {
-    const { data: colorPalettes, refetch } = useQuery({
+    const {
+        data: colorPalettes,
+        refetch,
+        isFetching,
+    } = useQuery({
         queryKey: ['colors'],
         queryFn: async (): Promise<string[][]> => {
             const res = await axios.post('https://api.huemint.com/color', {
@@ -53,5 +58,5 @@ export const usePalette = (): {
         selectedPalette.value = palette;
     };
 
-    return { colorPalettes, fetchColors, selectedPalette, selectPalette };
+    return { colorPalettes, isFetching, fetchColors, selectedPalette, selectPalette };
 };

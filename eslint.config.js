@@ -37,6 +37,10 @@ export default [
         },
     },
     {
+        name: 'app/vue3-recommended',
+        ...eslintPluginVue.configs['vue3-recommended'],
+    },
+    {
         name: 'app/vue-files',
         files: ['**/*.vue'],
         languageOptions: {
@@ -67,11 +71,7 @@ export default [
             'prefer-arrow-callback': 2,
             'prefer-arrow/prefer-arrow-functions': 2,
             'vue/multi-word-component-names': 0,
-            'vue/no-v-html': 0,
+            'vue/v-bind-style': [2, 'shorthand', { sameNameShorthand: 'always' }],
         },
-    },
-    {
-        name: 'app/vue3-recommended',
-        ...eslintPluginVue.configs['vue3-recommended'],
     },
 ];
