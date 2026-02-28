@@ -39,7 +39,7 @@ const formatTime = (time: string): string => {
         class="bg-[color-mix(in_srgb,var(--background)_90%,black)] rounded-lg shadow-md p-8 overflow-auto"
     >
         <h1 class="text-2xl font-bold mb-2">{{ serviceTitle || 'Service Run Sheet' }}</h1>
-        <p class="text-muted-foreground mb-6">{{ formattedDate() }}</p>
+        <p class="text-secondary mb-6">{{ formattedDate() }}</p>
 
         <table class="w-full border-collapse">
             <thead>
@@ -53,7 +53,7 @@ const formatTime = (time: string): string => {
                 <tr v-for="(item, index) in items" :key="index" class="border-b border-border">
                     <td class="py-2 pr-4">{{ formatTime(item.time) }}</td>
                     <td class="py-2 pr-4 font-medium">{{ item.title }}</td>
-                    <td class="py-2 text-muted-foreground">{{ item.description }}</td>
+                    <td class="py-2 text-secondary">{{ item.description }}</td>
                 </tr>
             </tbody>
         </table>

@@ -15,11 +15,13 @@ const { colorPalettes, fetchColors, selectedPalette, selectPalette } = usePalett
             <Button :icon="true">
                 <PhPalette :size="20" />
             </Button>
-            <template #popper class="!bg-popover rounded-lg">
-                <div class="w-80 p-3 space-y-3 bg-popover text-popover-foreground rounded-lg">
+            <template #popper>
+                <div
+                    class="w-80 p-3 space-y-3 bg-[color-mix(in_srgb,var(--background)_90%,black)] text-foreground rounded-lg border border-border"
+                >
                     <Button class="w-full" @click="fetchColors()">Get Colors</Button>
                     <div v-if="colorPalettes?.length">
-                        <p class="text-xs text-muted-foreground mb-2">Saved Palettes</p>
+                        <p class="text-xs text-foreground/50 mb-2">Saved Palettes</p>
                         <div class="grid grid-cols-2 gap-2">
                             <div
                                 v-for="(palette, idx) in colorPalettes"

@@ -12,8 +12,6 @@
     --color-primary-foreground: var(--primary-foreground);
     --color-secondary: var(--secondary);
     --color-secondary-foreground: var(--secondary-foreground);
-    --color-muted: var(--muted);
-    --color-muted-foreground: var(--muted-foreground);
     --color-accent: var(--accent);
     --color-accent-foreground: var(--accent-foreground);
     --color-danger: var(--danger);
@@ -33,8 +31,6 @@
 
     --popover: color-mix(in srgb, #fdfcfc 10%, #152e47);
     --popover-foreground: #fdfcfc;
-    --muted: color-mix(in srgb, #fdfcfc 10%, #152e47);
-    --muted-foreground: color-mix(in srgb, #fdfcfc 60%, #152e47);
     --accent: color-mix(in srgb, #fdfcfc 12%, #152e47);
     --accent-foreground: #fdfcfc;
     --danger: #ef4444;

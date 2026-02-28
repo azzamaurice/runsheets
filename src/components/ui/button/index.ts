@@ -12,7 +12,7 @@ export const buttonVariants = cva(
                 secondary: '',
             },
             variant: {
-                default: 'text-white',
+                default: '',
                 outline: 'border bg-transparent',
                 subtle: '',
                 text: 'bg-transparent underline-offset-4 hover:underline px-0',
@@ -23,7 +23,11 @@ export const buttonVariants = cva(
             },
         },
         compoundVariants: [
-            { intent: 'primary', variant: 'default', class: 'bg-primary hover:bg-primary/80' },
+            {
+                intent: 'primary',
+                variant: 'default',
+                class: 'bg-primary text-primary-foreground hover:bg-primary/80',
+            },
             {
                 intent: 'primary',
                 variant: 'outline',
@@ -38,7 +42,7 @@ export const buttonVariants = cva(
             {
                 intent: 'secondary',
                 variant: 'default',
-                class: 'bg-secondary hover:bg-secondary/80',
+                class: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
             },
             {
                 intent: 'secondary',

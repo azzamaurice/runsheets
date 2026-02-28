@@ -13,12 +13,15 @@ const { exportPng } = useExport();
 const dragIndex = ref<number | null>(null);
 const dragOverIndex = ref<number | null>(null);
 
-const itemRowStyles = cva('flex items-start gap-2 p-3 bg-accent/50 rounded-md', {
-    variants: {
-        dragging: { true: 'opacity-40' },
-        dragOver: { true: 'ring-2 ring-ring' },
-    },
-});
+const itemRowStyles = cva(
+    'flex items-start gap-2 p-3 bg-[color-mix(in_srgb,var(--background)_85%,black)] rounded-md',
+    {
+        variants: {
+            dragging: { true: 'opacity-40' },
+            dragOver: { true: 'ring-2 ring-ring' },
+        },
+    }
+);
 
 const removeButtonStyles = cva(
     'mt-2 text-danger hover:text-danger/70 text-xl leading-none transition-opacity',
@@ -89,7 +92,7 @@ const handlePrint = (): void => window.print();
                     @dragend="onDragEnd"
                 >
                     <span
-                        class="cursor-grab text-muted-foreground hover:text-foreground mt-2"
+                        class="cursor-grab text-foreground/50 hover:text-foreground mt-2"
                         title="Drag to reorder"
                         >⠿</span
                     >
