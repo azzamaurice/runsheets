@@ -61,14 +61,20 @@ export const useExport = (): {
 
         document.body.removeChild(clone)
 
-        canvas.toBlob(blob => {
+        canvas.toBlob(async blob => {
             if (!blob) return
-            const url = URL.createObjectURL(blob)
-            const link = document.createElement('a')
-            link.download = `run-sheet-${serviceDate.value}.png`
-            link.href = url
-            link.click()
-            URL.revokeObjectURL(url)
+            const filename = `run-sheet-${serviceDate.value}.png`
+            const file = new File([blob], filename, { type: 'image/png' })
+            if (navigator.canShare?.({ files: [file] })) {
+                await navigator.share({ files: [file], title: filename })
+            } else {
+                const url = URL.createObjectURL(blob)
+                const link = document.createElement('a')
+                link.download = filename
+                link.href = url
+                link.click()
+                URL.revokeObjectURL(url)
+            }
         }, 'image/png')
     }
 
