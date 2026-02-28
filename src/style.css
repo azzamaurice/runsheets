@@ -6,8 +6,6 @@
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
-    --color-card: var(--card);
-    --color-card-foreground: var(--card-foreground);
     --color-popover: var(--popover);
     --color-popover-foreground: var(--popover-foreground);
     --color-primary: var(--primary);
@@ -33,9 +31,6 @@
     --secondary: #38a5c5;
     --secondary-foreground: #fdfcfc;
 
-    /* Derived from background (slightly lighter) */
-    --card: color-mix(in srgb, #fdfcfc 8%, #152e47);
-    --card-foreground: #fdfcfc;
     --popover: color-mix(in srgb, #fdfcfc 10%, #152e47);
     --popover-foreground: #fdfcfc;
     --muted: color-mix(in srgb, #fdfcfc 10%, #152e47);

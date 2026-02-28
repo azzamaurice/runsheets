@@ -9,7 +9,7 @@ const { colorPalettes, fetchColors, selectedPalette, selectPalette } = usePalett
 </script>
 
 <template>
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-4">
         <PalettePreview v-if="selectedPalette.length" :palette="selectedPalette" />
         <Dropdown>
             <Button :icon="true">
@@ -27,7 +27,7 @@ const { colorPalettes, fetchColors, selectedPalette, selectPalette } = usePalett
                                 class="cursor-pointer hover:ring-2 hover:ring-ring rounded-lg overflow-hidden"
                                 @click="selectPalette(palette)"
                             >
-                                <PalettePreview :palette="palette" size="sm" />
+                                <PalettePreview :palette="palette" />
                             </div>
                         </div>
                     </div>

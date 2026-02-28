@@ -1,25 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useStorage } from '@vueuse/core';
 import PaletteDropdown from '@/components/PaletteDropdown.vue';
 import RunsheetInput from '@/components/RunsheetInput.vue';
 import RunsheetOutput from '@/components/RunsheetOutput.vue';
-import type { RunSheetItem } from '@/types/runsheet';
-
-const nextId = (): number => Date.now() + Math.random();
-
-const serviceTitle = useStorage<string>('service-title', '');
-const serviceDate = useStorage<string>('service-date', new Date().toISOString().slice(0, 10));
-const items = useStorage<RunSheetItem[]>('runsheet-items', [
-    { id: nextId(), time: '09:00', title: '', description: '' },
-]);
-
-const outputRef = ref<InstanceType<typeof RunsheetOutput> | null>(null);
-
-const handlePrint = (): void => window.print();
-const handleExport = (): void => {
-    outputRef.value?.exportPng();
-};
 </script>
 
 <template>
@@ -31,17 +13,8 @@ const handleExport = (): void => {
             <PaletteDropdown />
         </header>
 
-        <RunsheetInput
-            :title="serviceTitle"
-            :date="serviceDate"
-            :items="items"
-            @update:title="serviceTitle = $event"
-            @update:date="serviceDate = $event"
-            @update:items="items = $event"
-            @print="handlePrint"
-            @export="handleExport"
-        />
+        <RunsheetInput />
 
-        <RunsheetOutput ref="outputRef" :title="serviceTitle" :date="serviceDate" :items="items" />
+        <RunsheetOutput />
     </div>
 </template>

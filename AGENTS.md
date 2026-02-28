@@ -52,6 +52,15 @@
 - **Husky** - Git hooks (pre-commit runs lint-staged)
 - **lint-staged** - Runs linters on staged files
 
+## Patterns & Conventions
+
+- **Shared state via composables** — components must NOT use props/emits for shared app state. Use composables (e.g. `useRunsheet`, `usePalette`) and call them directly inside components
+- **cva for ALL conditional classes** — never use inline ternaries (`:class="x ? 'a' : 'b'"`) for styling. Always define a `cva` function with named variants instead
+- **`size-` for equal dimensions** — always use `size-N` instead of `w-N h-N` when width and height are the same value
+- **No inline CSS** — never use `style=` attribute for styling. Always use Tailwind classes (including arbitrary values like `bg-[color-mix(...)]`)
+- **Arrow functions only** — no `function` declarations anywhere
+- **No inferred types** — all variables, parameters and return types must be explicitly typed
+
 ## Commands
 
 ```bash
