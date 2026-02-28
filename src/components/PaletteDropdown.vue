@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { PhCaretLeft, PhCaretRight, PhPalette } from '@phosphor-icons/vue'
 import { Dropdown } from 'floating-vue'
+import { map } from 'lodash'
 import { computed } from 'vue'
 
 import PalettePreview from '@/components/PalettePreview.vue'
@@ -10,6 +11,7 @@ import Select from '@/components/ui/select/Select.vue'
 import { useFont } from '@/composables/useFont'
 import { usePalette } from '@/composables/usePalette'
 import { COLOUR_SCHEMES } from '@/constants/colourSchemes'
+import type { SelectOption } from '@/types/select'
 
 const DEFAULT_PALETTE: string[] = ['#152e47', '#fdfcfc', '#dc5b3d', '#38a5c5']
 
@@ -38,7 +40,13 @@ const resetAll = (): void => {
     selectFont('jost')
 }
 
-const schemeOptions = COLOUR_SCHEMES.map(s => ({ label: s.label, value: s.value }))
+const schemeOptions: SelectOption[] = map(
+    COLOUR_SCHEMES,
+    (s: SelectOption): SelectOption => ({
+        label: s.label,
+        value: s.value
+    })
+)
 </script>
 
 <template>

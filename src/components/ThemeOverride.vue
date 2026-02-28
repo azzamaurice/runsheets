@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { join } from 'lodash'
 import { computed } from 'vue'
 
 import { useFont } from '@/composables/useFont'
@@ -36,7 +37,7 @@ const css = computed((): string => {
 
     rules.push(`font-family: ${fontFamily.value}`)
 
-    return `:root {\n    ${rules.join(';\n    ')};\n}`
+    return `:root {\n    ${join(rules, ';\n    ')};\n}`
 })
 </script>
 

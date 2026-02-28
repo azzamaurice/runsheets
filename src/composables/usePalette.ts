@@ -1,8 +1,10 @@
 import { useStorage } from '@vueuse/core'
-import type { Ref } from 'vue'
+import { join, slice, sortBy } from 'lodash'
 import { computed, ref, watch } from 'vue'
 
-const paletteModules: Record<string, () => Promise<{ default: string[][] }>> = {
+import type { PaletteModule, UsePaletteReturn } from '@/types/palette'
+
+const paletteModules: Record<string, () => Promise<PaletteModule>> = {
     default: () => import('@/constants/palettes/default.json'),
     'high-contrast': () => import('@/constants/palettes/high-contrast.json'),
     'bright-light': () => import('@/constants/palettes/bright-light.json'),
@@ -24,7 +26,7 @@ const fnv1a = (str: string): number => {
 }
 
 const deterministicShuffle = (palettes: string[][]): string[][] =>
-    [...palettes].sort((a: string[], b: string[]): number => fnv1a(a.join('')) - fnv1a(b.join('')))
+    sortBy(palettes, (p: string[]): number => fnv1a(join(p, '')))
 
 const allPalettes = ref<string[][]>([])
 const selectedScheme = useStorage<string>('selected-scheme', 'default')
@@ -34,7 +36,7 @@ const selectedPalette = useStorage<string[]>('selected-palette', [])
 
 const loadPalettes = async (scheme: string, resetPage: boolean): Promise<void> => {
     isLoading.value = true
-    const loader: () => Promise<{ default: string[][] }> =
+    const loader: () => Promise<PaletteModule> =
         paletteModules[scheme] ?? paletteModules['default']!
     const module = await loader()
     allPalettes.value = deterministicShuffle(module.default)
@@ -59,7 +61,7 @@ const totalPages = computed((): number => Math.ceil(allPalettes.value.length / P
 
 const colorPalettes = computed((): string[][] => {
     const start: number = page.value * PAGE_SIZE
-    return allPalettes.value.slice(start, start + PAGE_SIZE)
+    return slice(allPalettes.value, start, start + PAGE_SIZE)
 })
 
 const nextPage = (): void => {
@@ -86,19 +88,7 @@ const selectScheme = (value: string): void => {
     selectedScheme.value = value
 }
 
-export const usePalette = (): {
-    colorPalettes: Ref<string[][]>
-    isLoading: Ref<boolean>
-    selectedPalette: Ref<string[]>
-    selectPalette: (palette: string[]) => void
-    clearPalette: () => void
-    selectedScheme: Ref<string>
-    selectScheme: (value: string) => void
-    page: Ref<number>
-    totalPages: Ref<number>
-    nextPage: () => void
-    prevPage: () => void
-} => {
+export const usePalette = (): UsePaletteReturn => {
     return {
         colorPalettes,
         isLoading,

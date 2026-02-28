@@ -1,14 +1,13 @@
 import html2canvas from 'html2canvas-pro'
+import { forEach } from 'lodash'
 import { nextTick, ref } from 'vue'
 
 import { useRunsheet } from '@/composables/useRunsheet'
+import type { UseExportReturn } from '@/types/export'
 
 const outputEl = ref<HTMLElement | null>(null)
 
-export const useExport = (): {
-    outputEl: typeof outputEl
-    exportPng: () => Promise<void>
-} => {
+export const useExport = (): UseExportReturn => {
     const { serviceDate } = useRunsheet()
 
     const exportPng = async (): Promise<void> => {
@@ -46,8 +45,8 @@ export const useExport = (): {
         }
 
         copyStyles(outputEl.value, clone)
-        allOriginal.forEach((orig, i) => {
-            const cloned = allCloned[i]
+        forEach(allOriginal, (orig: HTMLElement, i: number) => {
+            const cloned: HTMLElement | undefined = allCloned[i]
             if (cloned) copyStyles(orig, cloned)
         })
 

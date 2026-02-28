@@ -1,13 +1,9 @@
 import { useStorage } from '@vueuse/core'
-import type { Ref } from 'vue'
+import { find, map } from 'lodash'
 import { computed, watch } from 'vue'
 
-interface FontOption {
-    label: string
-    value: string
-    family: string
-    load: () => Promise<unknown>
-}
+import type { FontOption, UseFontReturn } from '@/types/font'
+import type { SelectOption } from '@/types/select'
 
 const FONTS: FontOption[] = [
     {
@@ -70,7 +66,7 @@ const selectedFont = useStorage<string>('selected-font', 'jost')
 const loadedFonts = new Set<string>(['jost'])
 
 const loadFont = async (value: string): Promise<void> => {
-    const font: FontOption | undefined = FONTS.find((f: FontOption): boolean => f.value === value)
+    const font: FontOption | undefined = find(FONTS, (f: FontOption): boolean => f.value === value)
     if (!font || loadedFonts.has(value)) return
     await font.load()
     loadedFonts.add(value)
@@ -85,14 +81,16 @@ watch(
 )
 
 const fontFamily = computed((): string => {
-    const font: FontOption | undefined = FONTS.find(
+    const font: FontOption | undefined = find(
+        FONTS,
         (f: FontOption): boolean => f.value === selectedFont.value
     )
     return font ? `'${font.family}', sans-serif` : "'Jost Variable', sans-serif"
 })
 
-const fontOptions: { label: string; value: string }[] = FONTS.map(
-    (f: FontOption): { label: string; value: string } => ({
+const fontOptions: SelectOption[] = map(
+    FONTS,
+    (f: FontOption): SelectOption => ({
         label: f.label,
         value: f.value
     })
@@ -102,12 +100,7 @@ const selectFont = (value: string): void => {
     selectedFont.value = value
 }
 
-export const useFont = (): {
-    selectedFont: Ref<string>
-    selectFont: (value: string) => void
-    fontOptions: { label: string; value: string }[]
-    fontFamily: Ref<string>
-} => {
+export const useFont = (): UseFontReturn => {
     return {
         selectedFont,
         selectFont,

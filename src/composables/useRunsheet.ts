@@ -1,7 +1,7 @@
 import { useStorage } from '@vueuse/core'
-import type { Ref } from 'vue'
+import { map } from 'lodash'
 
-import type { RunSheetItem } from '@/types/runsheet'
+import type { RunSheetItem, UseRunsheetReturn } from '@/types/runsheet'
 
 const nextId = (): number => Date.now() + Math.random()
 
@@ -11,19 +11,11 @@ const items = useStorage<RunSheetItem[]>('runsheet-items', [
     { id: nextId(), time: '18:00', title: '', description: '' }
 ])
 
-export const useRunsheet = (): {
-    serviceTitle: Ref<string>
-    serviceDate: Ref<string>
-    items: Ref<RunSheetItem[]>
-    addItem: () => void
-    removeItem: (index: number) => void
-    updateItem: (index: number, field: keyof RunSheetItem, value: string) => void
-    reset: () => void
-} => {
+export const useRunsheet = (): UseRunsheetReturn => {
     const nextTime = (): string => {
         const last = items.value[items.value.length - 1]
         if (!last?.time) return ''
-        const [h, m] = last.time.split(':').map(Number)
+        const [h, m] = map(last.time.split(':'), Number)
         const total = (h ?? 0) * 60 + (m ?? 0) + 5
         const hh = String(Math.floor(total / 60) % 24).padStart(2, '0')
         const mm = String(total % 60).padStart(2, '0')

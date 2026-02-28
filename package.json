@@ -28,6 +28,7 @@
     "clsx": "^2.1.1",
     "floating-vue": "^5.2.2",
     "html2canvas-pro": "^2.0.2",
+    "lodash": "^4.17.23",
     "lucide-vue-next": "^0.575.0",
     "reka-ui": "^2.8.2",
     "tailwind-merge": "^3.5.0",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "@prettier/plugin-xml": "^3.4.2",
     "@tailwindcss/vite": "^4.2.1",
+    "@types/lodash": "^4.17.24",
     "@types/node": "^24.10.1",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
