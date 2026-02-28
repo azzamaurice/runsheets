@@ -14,20 +14,20 @@ const dragIndex = ref<number | null>(null)
 const dragOverIndex = ref<number | null>(null)
 
 const itemRowStyles = cva(
-    'flex items-start gap-2 p-3 bg-[color-mix(in_srgb,var(--background)_85%,black)] rounded-md',
+    'flex items-start gap-2 rounded-md bg-[color-mix(in_srgb,var(--background)_85%,black)] p-3',
     {
         variants: {
             dragging: { true: 'opacity-40' },
-            dragOver: { true: 'ring-2 ring-ring' }
+            dragOver: { true: 'ring-ring ring-2' }
         }
     }
 )
 
 const removeButtonStyles = cva(
-    'mt-2 text-danger hover:text-danger/70 text-xl leading-none transition-opacity',
+    'text-danger hover:text-danger/70 mt-2 text-xl leading-none transition-opacity',
     {
         variants: {
-            disabled: { true: 'opacity-30 cursor-not-allowed' }
+            disabled: { true: 'cursor-not-allowed opacity-30' }
         }
     }
 )
@@ -56,7 +56,7 @@ const handlePrint = (): void => window.print()
 <template>
     <div class="flex flex-col gap-4 print:block">
         <div
-            class="bg-[color-mix(in_srgb,var(--background)_80%,black)] rounded-lg shadow-md p-6 print:hidden"
+            class="rounded-lg bg-[color-mix(in_srgb,var(--background)_80%,black)] p-6 shadow-md print:hidden"
         >
             <div class="mb-4">
                 <Label for="service-title">Service Title</Label>
@@ -74,7 +74,7 @@ const handlePrint = (): void => window.print()
                 <Input id="service-date" v-model="serviceDate" type="date" class="mt-1" />
             </div>
 
-            <hr class="my-6 border-border" />
+            <hr class="border-border my-6" />
 
             <div class="space-y-3">
                 <div
@@ -92,11 +92,11 @@ const handlePrint = (): void => window.print()
                     @dragend="onDragEnd"
                 >
                     <span
-                        class="cursor-grab text-foreground/50 hover:text-foreground mt-2"
+                        class="text-foreground/50 hover:text-foreground mt-2 cursor-grab"
                         title="Drag to reorder"
                         >⠿</span
                     >
-                    <div class="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-3">
                         <div>
                             <Label :for="`time-${item.id}`" class="text-xs">Start Time</Label>
                             <Input
@@ -146,7 +146,7 @@ const handlePrint = (): void => window.print()
                 + Add Item
             </Button>
 
-            <hr class="my-6 border-border" />
+            <hr class="border-border my-6" />
 
             <div class="flex gap-4">
                 <Button variant="outline" @click="reset">Reset</Button>

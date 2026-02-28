@@ -17,7 +17,7 @@ const { colorPalettes, isFetching, fetchColors, selectedPalette, selectPalette }
             </Button>
             <template #popper>
                 <div
-                    class="w-80 p-3 space-y-3 bg-[color-mix(in_srgb,var(--background)_80%,black)] text-foreground rounded-lg border border-border"
+                    class="text-foreground border-border w-80 space-y-3 rounded-lg border bg-[color-mix(in_srgb,var(--background)_80%,black)] p-3"
                 >
                     <Button class="w-full" :disabled="isFetching" @click="fetchColors()">
                         <PhCircleNotch v-if="isFetching" :size="16" class="animate-spin" />
@@ -28,7 +28,7 @@ const { colorPalettes, isFetching, fetchColors, selectedPalette, selectPalette }
                             <div
                                 v-for="(palette, idx) in colorPalettes"
                                 :key="idx"
-                                class="cursor-pointer hover:ring-2 hover:ring-ring rounded-lg overflow-hidden"
+                                class="hover:ring-ring cursor-pointer overflow-hidden rounded-lg hover:ring-2"
                                 @click="selectPalette(palette)"
                             >
                                 <PalettePreview :palette />

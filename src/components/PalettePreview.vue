@@ -5,11 +5,11 @@ defineProps<{
 </script>
 
 <template>
-    <div class="flex rounded-md overflow-hidden shadow-md">
+    <div class="flex overflow-hidden rounded-md shadow-md">
         <div
             v-for="(color, idx) in palette"
             :key="idx"
-            class="flex-1 size-10"
+            class="size-10 flex-1"
             :style="{ backgroundColor: color }"
             :title="color"
         />

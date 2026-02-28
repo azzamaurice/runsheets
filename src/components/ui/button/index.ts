@@ -4,7 +4,7 @@ import { cva } from 'class-variance-authority'
 export { default as Button } from './Button.vue'
 
 export const buttonVariants = cva(
-    'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium h-10 px-4 transition-all disabled:pointer-events-none disabled:opacity-50 outline-none focus-visible:ring-4 focus-visible:ring-ring/60 cursor-pointer',
+    'focus-visible:ring-ring/60 inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-md px-4 text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-4 disabled:pointer-events-none disabled:opacity-50',
     {
         variants: {
             intent: {
@@ -15,7 +15,7 @@ export const buttonVariants = cva(
                 default: '',
                 outline: 'border bg-transparent',
                 subtle: '',
-                text: 'bg-transparent underline-offset-4 hover:underline px-0'
+                text: 'bg-transparent px-0 underline-offset-4 hover:underline'
             },
             icon: {
                 true: 'size-10 px-0',

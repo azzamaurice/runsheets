@@ -7,6 +7,8 @@
     "bracketSpacing": true,
     "arrowParens": "avoid",
     "vueIndentScriptAndStyle": false,
+    "plugins": ["prettier-plugin-tailwindcss"],
+    "tailwindFunctions": ["cva", "cn"],
     "overrides": [
         {
             "files": "*.json",

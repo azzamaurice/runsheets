@@ -7,9 +7,9 @@ import ThemeOverride from '@/components/ThemeOverride.vue'
 
 <template>
     <div
-        class="min-h-screen flex flex-col md:grid md:grid-cols-[1fr_2fr] gap-4 p-4 bg-background text-foreground md:grid-rows-[auto_1fr]"
+        class="bg-background text-foreground flex min-h-screen flex-col gap-4 p-4 md:grid md:grid-cols-[1fr_2fr] md:grid-rows-[auto_1fr]"
     >
-        <header class="md:col-span-2 flex items-center justify-between print:hidden">
+        <header class="flex items-center justify-between md:col-span-2 print:hidden">
             <h1 class="text-xl font-bold">Runsheets</h1>
             <PaletteDropdown />
         </header>

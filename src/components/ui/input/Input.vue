@@ -21,7 +21,7 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 })
 
 const inputStyles = cva(
-    'h-10 w-full min-w-0 rounded-md border bg-input px-3 text-sm text-foreground placeholder:text-foreground/50 transition-[color,box-shadow] outline-none disabled:pointer-events-none disabled:opacity-50 focus-visible:ring-4 focus-visible:ring-ring/60',
+    'bg-input text-foreground placeholder:text-foreground/50 focus-visible:ring-ring/60 h-10 w-full min-w-0 rounded-md border px-3 text-sm transition-[color,box-shadow] outline-none focus-visible:ring-4 disabled:pointer-events-none disabled:opacity-50',
     {
         variants: {
             intent: {
