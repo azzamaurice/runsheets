@@ -4,6 +4,8 @@ import { useRunsheet } from '@/composables/useRunsheet'
 
 const outputEl = ref<HTMLElement | null>(null)
 
+const EXPORT_SIZE = 1200
+
 export const useExport = (): {
     outputEl: typeof outputEl
     exportPng: () => Promise<void>
@@ -14,16 +16,24 @@ export const useExport = (): {
         await nextTick()
         if (!outputEl.value) return
 
-        const { offsetWidth, offsetHeight } = outputEl.value
-        const clone = outputEl.value.cloneNode(true) as HTMLElement
-        clone.style.position = 'fixed'
-        clone.style.top = '-9999px'
-        clone.style.left = '-9999px'
-        clone.style.width = `${offsetWidth}px`
-        clone.style.height = `${offsetHeight}px`
-        clone.style.borderRadius = '0'
-        document.body.appendChild(clone)
+        // Create a fixed-size off-screen container so cqw units resolve
+        // at a canonical size regardless of the device viewport
+        const wrapper = document.createElement('div')
+        wrapper.style.position = 'fixed'
+        wrapper.style.top = '-99999px'
+        wrapper.style.left = '-99999px'
+        wrapper.style.width = `${EXPORT_SIZE}px`
+        wrapper.style.height = `${EXPORT_SIZE}px`
+        wrapper.style.containerType = 'inline-size'
+        document.body.appendChild(wrapper)
 
+        const clone = outputEl.value.cloneNode(true) as HTMLElement
+        clone.style.width = `${EXPORT_SIZE}px`
+        clone.style.height = `${EXPORT_SIZE}px`
+        clone.style.borderRadius = '0'
+        wrapper.appendChild(clone)
+
+        // Copy computed styles so colours resolve correctly
         const allOriginal = Array.from(outputEl.value.querySelectorAll('*')) as HTMLElement[]
         const allCloned = Array.from(clone.querySelectorAll('*')) as HTMLElement[]
         clone.style.backgroundColor = window.getComputedStyle(outputEl.value).backgroundColor
@@ -40,37 +50,26 @@ export const useExport = (): {
                 'border-bottom-color',
                 'border-left-color',
                 'border-right-color',
-                'font-size',
                 'font-weight',
-                'font-family',
-                'padding-top',
-                'padding-bottom',
-                'padding-left',
-                'padding-right',
-                'margin-top',
-                'margin-bottom',
-                'margin-left',
-                'margin-right'
+                'font-family'
             ].forEach(prop => {
                 const val = cs.getPropertyValue(prop)
                 if (val) cloned.style.setProperty(prop, val)
             })
         })
 
-        const pageBackground =
-            window
-                .getComputedStyle(document.documentElement)
-                .getPropertyValue('--background')
-                .trim() || '#152e47'
+        await nextTick()
 
         const canvas = await html2canvas(clone, {
             scale: 2,
-            backgroundColor: pageBackground,
+            width: EXPORT_SIZE,
+            height: EXPORT_SIZE,
+            backgroundColor: null,
             useCORS: true,
             logging: false
         })
 
-        document.body.removeChild(clone)
+        document.body.removeChild(wrapper)
 
         canvas.toBlob(blob => {
             if (!blob) return
