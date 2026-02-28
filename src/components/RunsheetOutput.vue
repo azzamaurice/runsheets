@@ -16,9 +16,8 @@ const formattedDate = (): string => {
     if (!serviceDate.value) return ''
     const d = new Date(serviceDate.value + 'T00:00:00')
     return d.toLocaleDateString('en-AU', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
+        weekday: 'short',
+        month: 'short',
         day: 'numeric'
     })
 }
@@ -27,9 +26,8 @@ const formatTime = (time: string): string => {
     if (!time) return ''
     const [h, m] = time.split(':')
     const hour = parseInt(h ?? '0')
-    const ampm = hour >= 12 ? 'PM' : 'AM'
     const h12 = hour % 12 || 12
-    return `${h12}:${m} ${ampm}`
+    return `${h12}:${m}`
 }
 </script>
 
@@ -47,13 +45,13 @@ const formatTime = (time: string): string => {
                     class="bg-background grid size-full grid-cols-[1fr_5fr] gap-[4cqw] rounded-[1cqw] p-[4cqw] text-[2.5cqw] print:bg-transparent">
                     <div class="relative">
                         <h1
-                            class="text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 text-[10cqw] font-semibold whitespace-nowrap uppercase">
-                            {{ serviceTitle || 'Service Run Sheet' }}
+                            class="text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 text-[14cqw] font-bold whitespace-nowrap uppercase">
+                            {{ serviceTitle || 'Runsheet' }}
                         </h1>
                     </div>
                     <div class="flex flex-col justify-center gap-[4cqw]">
                         <p
-                            class="text-secondary text-[calc(3cqw/max(1,var(--item-count)/5))] font-semibold">
+                            class="text-secondary text-[calc(6cqw/max(1,var(--item-count)/5))] font-semibold">
                             {{ formattedDate() }}
                         </p>
 
@@ -61,9 +59,9 @@ const formatTime = (time: string): string => {
                             <li
                                 v-for="(item, index) in items"
                                 :key="index"
-                                class="flex items-center gap-[calc(6cqw/max(1,var(--item-count)/5))]">
+                                class="flex items-center gap-[calc(5cqw/max(1,var(--item-count)/5))]">
                                 <div
-                                    class="text-[calc(4cqw/max(1,var(--item-count)/5))] font-bold opacity-75">
+                                    class="text-right text-[calc(8.5cqw/max(1,var(--item-count)/5))] font-bold opacity-75">
                                     {{ formatTime(item.time) }}
                                 </div>
                                 <div
@@ -74,7 +72,7 @@ const formatTime = (time: string): string => {
                                     </div>
                                     <div
                                         v-if="!!item.description"
-                                        class="text-secondary text-[calc(3.5cqw/max(1,var(--item-count)/5))] font-medium">
+                                        class="text-secondary text-[calc(3.5cqw/max(1,var(--item-count)/5))] font-light">
                                         {{ item.description }}
                                     </div>
                                 </div>

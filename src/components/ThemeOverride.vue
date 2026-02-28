@@ -24,7 +24,7 @@ const css = computed((): string => {
         const blendTarget: string = isLight(background) ? 'black' : 'white'
         rules.push(
             `--background: ${background}`,
-            `--background-body: color-mix(in srgb, ${background} 80%, ${blendTarget})`,
+            `--background-body: color-mix(in srgb, ${background} 90%, ${blendTarget})`,
             `--foreground: ${foreground}`,
             `--primary: ${primary}`,
             `--primary-foreground: ${primaryForeground}`,

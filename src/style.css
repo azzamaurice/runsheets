@@ -31,7 +31,7 @@
     --secondary: #38a5c5;
     --secondary-foreground: #fdfcfc;
 
-    --background-body: color-mix(in srgb, var(--background) 80%, white);
+    --background-body: color-mix(in srgb, var(--background) 95%, white);
 
     --popover: color-mix(in srgb, #fdfcfc 10%, #152e47);
     --popover-foreground: #fdfcfc;
