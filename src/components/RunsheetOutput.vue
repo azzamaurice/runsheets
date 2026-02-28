@@ -35,7 +35,7 @@ const formatTime = (time: string): string => {
 
 <template>
     <!-- Outer: takes grid space, centers the ratio box -->
-    <div class="h-full overflow-hidden">
+    <div>
         <!-- Ratio enforcer + container query context -->
         <div class="aspect-square max-h-full max-w-full w-full @container">
             <!-- Shadow wrapper: visual only, not exported -->

@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { useRunsheet } from '@/composables/useRunsheet';
 import { useExport } from '@/composables/useExport';
 
-const { serviceTitle, serviceDate, items, addItem, removeItem, updateItem } = useRunsheet();
+const { serviceTitle, serviceDate, items, addItem, removeItem, updateItem, reset } = useRunsheet();
 const { exportPng } = useExport();
 
 const dragIndex = ref<number | null>(null);
@@ -54,7 +54,7 @@ const handlePrint = (): void => window.print();
 </script>
 
 <template>
-    <div class="flex flex-col gap-4 overflow-auto print:block">
+    <div class="flex flex-col gap-4 print:block">
         <div
             class="bg-[color-mix(in_srgb,var(--background)_80%,black)] rounded-lg shadow-md p-6 print:hidden"
         >
@@ -149,6 +149,7 @@ const handlePrint = (): void => window.print();
             <hr class="my-6 border-border" />
 
             <div class="flex gap-4">
+                <Button variant="outline" @click="reset">Reset</Button>
                 <Button class="flex-1" @click="handlePrint">Print</Button>
                 <Button intent="secondary" class="flex-1" @click="exportPng">Export PNG</Button>
             </div>
