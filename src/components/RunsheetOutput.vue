@@ -56,27 +56,28 @@ const formatTime = (time: string): string => {
                     <div class="flex flex-col justify-center gap-[4cqw]">
                         <p class="text-secondary">{{ formattedDate() }}</p>
 
-                        <ul class="flex flex-col gap-[calc(4cqw/max(1,var(--item-count)/6))]">
+                        <ul class="flex flex-col gap-[calc(4cqw/max(1,var(--item-count)/5))]">
                             <li
                                 v-for="(item, index) in items"
                                 :key="index"
-                                class="flex items-center gap-[calc(6cqw/max(1,var(--item-count)/6))]"
+                                class="flex items-center gap-[calc(6cqw/max(1,var(--item-count)/5))]"
                             >
                                 <div
-                                    class="font-bold opacity-75 text-[calc(4cqw/max(1,var(--item-count)/6))]"
+                                    class="font-bold opacity-75 text-[calc(4cqw/max(1,var(--item-count)/5))]"
                                 >
                                     {{ formatTime(item.time) }}
                                 </div>
                                 <div
-                                    class="flex flex-col gap-[calc(0.5cqw/max(1,var(--item-count)/6))]"
+                                    class="flex flex-col gap-[calc(0.5cqw/max(1,var(--item-count)/5))]"
                                 >
                                     <div
-                                        class="text-primary text-[calc(5cqw/max(1,var(--item-count)/6))] font-semibold"
+                                        class="text-primary text-[calc(5cqw/max(1,var(--item-count)/5))] font-semibold"
                                     >
                                         {{ item.title }}
                                     </div>
                                     <div
-                                        class="text-secondary font-medium text-[calc(3.5cqw/max(1,var(--item-count)/6))]"
+                                        v-if="!!item.description"
+                                        class="text-secondary font-medium text-[calc(3.5cqw/max(1,var(--item-count)/5))]"
                                     >
                                         {{ item.description }}
                                     </div>
