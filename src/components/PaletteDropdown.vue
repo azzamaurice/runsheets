@@ -1,24 +1,34 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { Dropdown } from 'floating-vue'
-import { PhPalette, PhCircleNotch } from '@phosphor-icons/vue'
+import { PhPalette, PhCaretLeft, PhCaretRight } from '@phosphor-icons/vue'
 import { Button } from '@/components/ui/button'
 import Select from '@/components/ui/select/Select.vue'
 import FormControl from '@/components/ui/form-control/FormControl.vue'
-import { Label } from '@/components/ui/label'
 import PalettePreview from '@/components/PalettePreview.vue'
 import { usePalette } from '@/composables/usePalette'
+import { COLOUR_SCHEMES } from '@/constants/colourSchemes'
 
-const DEFAULT_PALETTE = ['#152e47', '#fdfcfc', '#dc5b3d', '#38a5c5']
+const DEFAULT_PALETTE: string[] = ['#152e47', '#fdfcfc', '#dc5b3d', '#38a5c5']
 
-const { colorPalettes, isFetching, fetchColors, selectedPalette, selectPalette, clearPalette } =
-    usePalette()
+const {
+    colorPalettes,
+    selectedPalette,
+    selectPalette,
+    clearPalette,
+    selectedScheme,
+    selectScheme,
+    page,
+    totalPages,
+    nextPage,
+    prevPage
+} = usePalette()
 
 const displayPalette = computed((): string[] =>
     selectedPalette.value.length ? selectedPalette.value : DEFAULT_PALETTE
 )
 
-const selectedScheme = ref<string | null>(null)
+const schemeOptions = COLOUR_SCHEMES.map(s => ({ label: s.label, value: s.value }))
 </script>
 
 <template>
@@ -45,35 +55,44 @@ const selectedScheme = ref<string | null>(null)
                             @click="clearPalette">
                             Reset
                         </Button>
-                        <Button
-                            intent="secondary"
-                            class="flex-1"
-                            :disabled="isFetching"
-                            @click="fetchColors">
-                            <PhCircleNotch
-                                v-if="isFetching"
-                                :size="16"
-                                class="animate-spin" />
-                            {{ isFetching ? 'Fetching...' : 'Get Colors' }}
-                        </Button>
+                        <FormControl class="flex-1">
+                            <Select
+                                :model-value="selectedScheme"
+                                :options="schemeOptions"
+                                @update:model-value="selectScheme($event as string)" />
+                        </FormControl>
                     </div>
-                    <FormControl>
-                        <Label>Colour Schemes</Label>
-                        <Select
-                            v-model="selectedScheme"
-                            :options="[]"
-                            placeholder="Pick a scheme..." />
-                    </FormControl>
-                    <div v-if="colorPalettes?.length">
-                        <div class="grid grid-cols-2 gap-2">
-                            <div
-                                v-for="(palette, idx) in colorPalettes"
-                                :key="idx"
-                                class="hover:ring-ring cursor-pointer overflow-hidden rounded-lg hover:ring-2"
-                                @click="selectPalette(palette)">
-                                <PalettePreview :palette />
-                            </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div
+                            v-for="(palette, idx) in colorPalettes"
+                            :key="idx"
+                            class="hover:ring-ring cursor-pointer overflow-hidden rounded-lg hover:ring-2"
+                            @click="selectPalette(palette)">
+                            <PalettePreview :palette />
                         </div>
+                    </div>
+                    <div
+                        v-if="totalPages > 1"
+                        class="flex items-center justify-between">
+                        <Button
+                            icon
+                            :disabled="page === 0"
+                            @click="prevPage">
+                            <PhCaretLeft
+                                weight="bold"
+                                :size="20" />
+                        </Button>
+                        <span class="font-medium opacity-80">
+                            {{ page + 1 }} / {{ totalPages }}
+                        </span>
+                        <Button
+                            icon
+                            :disabled="page === totalPages - 1"
+                            @click="nextPage">
+                            <PhCaretRight
+                                weight="bold"
+                                :size="20" />
+                        </Button>
                     </div>
                 </div>
             </template>
