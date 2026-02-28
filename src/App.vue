@@ -14,7 +14,7 @@ interface RunSheetItem {
     description: string;
 }
 
-const itemRowStyles = cva('flex items-start gap-2 p-3 bg-gray-50 rounded-md', {
+const itemRowStyles = cva('flex items-start gap-2 p-3 bg-background/50 rounded-md', {
     variants: {
         dragging: {
             true: 'opacity-40',
@@ -36,8 +36,8 @@ const removeButtonStyles = cva(
     }
 );
 
-const serviceTitle = ref('');
-const serviceDate = ref(new Date().toISOString().slice(0, 10));
+const serviceTitle = useStorage('service-title', '');
+const serviceDate = useStorage('service-date', new Date().toISOString().slice(0, 10));
 const output = ref<HTMLElement | null>(null);
 
 const { data: colorPalettes, refetch: fetchColors } = useQuery({
@@ -80,14 +80,16 @@ const selectPalette = (palette: string[]): void => {
     selectedPalette.value = palette;
 };
 
-const items = ref<RunSheetItem[]>([{ id: nextId(), time: '09:00', title: '', description: '' }]);
-
-const dragIndex = ref<number | null>(null);
-const dragOverIndex = ref<number | null>(null);
-
 const nextId = (): number => {
     return Date.now() + Math.random();
 };
+
+const items = useStorage<RunSheetItem[]>('runsheet-items', [
+    { id: nextId(), time: '09:00', title: '', description: '' },
+]);
+
+const dragIndex = ref<number | null>(null);
+const dragOverIndex = ref<number | null>(null);
 
 const formattedDate = computed(() => {
     if (!serviceDate.value) return '';
@@ -163,7 +165,7 @@ import { Dropdown } from 'floating-vue';
 
 <template>
     <div
-        class="absolute inset-0 flex flex-col md:grid md:grid-cols-2 md:grid-rows-[auto_1fr] gap-4 p-4"
+        class="absolute inset-0 flex flex-col md:grid md:grid-cols-2 md:grid-rows-[auto_1fr] gap-4 p-4 bg-background text-foreground"
     >
         <header class="md:col-span-2 flex items-center justify-between p-4 print:hidden">
             <h1>Runsheets</h1>
@@ -182,20 +184,20 @@ import { Dropdown } from 'floating-vue';
                 </div>
                 <Dropdown>
                     <button
-                        class="p-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                        class="p-2 bg-primary text-white rounded-md hover:bg-primary/80 transition-colors"
                     >
                         <PhPalette :size="20" />
                     </button>
-                    <template #popper>
+                    <template #popper class="!bg-foreground/5 rounded-lg">
                         <div class="w-80 p-3 space-y-3">
                             <button
                                 @click="fetchColors()"
-                                class="w-full px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                                class="w-full px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/80 transition-colors"
                             >
                                 Get Colors
                             </button>
                             <div v-if="colorPalettes?.length">
-                                <p class="text-xs text-gray-500 mb-2">Saved Palettes</p>
+                                <p class="text-xs text-foreground/60 mb-2">Saved Palettes</p>
                                 <div class="grid grid-cols-2 gap-2">
                                     <div
                                         v-for="(palette, idx) in colorPalettes ?? []"
@@ -220,29 +222,29 @@ import { Dropdown } from 'floating-vue';
         </header>
 
         <div class="flex flex-col gap-4 overflow-auto print:block">
-            <div class="bg-white rounded-lg shadow-md p-6 print:hidden">
+            <div class="bg-foreground/5 rounded-lg shadow-md p-6 print:hidden">
                 <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-1"
+                    <label class="block text-sm font-medium text-foreground mb-1"
                         >Service Title</label
                     >
                     <input
                         v-model="serviceTitle"
                         type="text"
                         placeholder="e.g. Sunday Morning Service"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-3 py-2 border border-foreground/30 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                 </div>
 
                 <div class="mb-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Date</label>
+                    <label class="block text-sm font-medium text-foreground mb-1">Date</label>
                     <input
                         v-model="serviceDate"
                         type="date"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-3 py-2 border border-foreground/30 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                 </div>
 
-                <hr class="my-6" />
+                <hr class="my-6 border-foreground/40" />
 
                 <div class="space-y-4">
                     <div
@@ -260,35 +262,39 @@ import { Dropdown } from 'floating-vue';
                         @dragend="onDragEnd"
                     >
                         <span
-                            class="cursor-grab text-gray-400 hover:text-gray-600 mt-3"
+                            class="cursor-grab text-foreground/50 hover:text-foreground/80 mt-3"
                             title="Drag to reorder"
                             >⠿</span
                         >
                         <div class="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-3">
                             <div>
-                                <label class="block text-xs text-gray-500 mb-1">Start Time</label>
+                                <label class="block text-xs text-foreground/60 mb-1"
+                                    >Start Time</label
+                                >
                                 <input
                                     v-model="item.time"
                                     type="time"
-                                    class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    class="w-full px-2 py-1 border border-foreground/30 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
                             <div>
-                                <label class="block text-xs text-gray-500 mb-1">Title</label>
+                                <label class="block text-xs text-foreground/60 mb-1">Title</label>
                                 <input
                                     v-model="item.title"
                                     type="text"
                                     placeholder="e.g. Worship Set"
-                                    class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    class="w-full px-2 py-1 border border-foreground/30 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
                             <div>
-                                <label class="block text-xs text-gray-500 mb-1">Description</label>
+                                <label class="block text-xs text-foreground/60 mb-1"
+                                    >Description</label
+                                >
                                 <input
                                     v-model="item.description"
                                     type="text"
                                     placeholder="e.g. Led by worship team"
-                                    class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    class="w-full px-2 py-1 border border-foreground/30 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
                         </div>
@@ -304,23 +310,23 @@ import { Dropdown } from 'floating-vue';
 
                 <button
                     @click="addItem"
-                    class="mt-4 w-full py-2 border-2 border-dashed border-gray-300 text-gray-500 hover:border-gray-400 hover:text-gray-600 rounded-md transition-colors"
+                    class="mt-4 w-full py-2 border-2 border-dashed border-foreground/30 text-foreground/60 hover:border-foreground/40 hover:text-foreground/80 rounded-md transition-colors"
                 >
                     + Add Item
                 </button>
 
-                <hr class="my-6" />
+                <hr class="my-6 border-foreground/40" />
 
                 <div class="flex gap-4">
                     <button
                         @click="printSheet"
-                        class="flex-1 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                        class="flex-1 py-2 bg-primary text-white rounded-md hover:bg-primary/80 transition-colors"
                     >
                         Print
                     </button>
                     <button
                         @click="exportPng"
-                        class="flex-1 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+                        class="flex-1 py-2 bg-secondary text-white rounded-md hover:bg-secondary/80 transition-colors"
                     >
                         Export PNG
                     </button>
@@ -328,9 +334,12 @@ import { Dropdown } from 'floating-vue';
             </div>
         </div>
 
-        <div ref="output" class="bg-white rounded-lg shadow-md p-8 overflow-auto print:hidden">
+        <div
+            ref="output"
+            class="bg-foreground/5 rounded-lg shadow-md p-8 overflow-auto print:hidden"
+        >
             <h1 class="text-2xl font-bold mb-2">{{ serviceTitle || 'Service Run Sheet' }}</h1>
-            <p class="text-gray-600 mb-6">{{ formattedDate }}</p>
+            <p class="text-foreground/80 mb-6">{{ formattedDate }}</p>
 
             <table class="w-full border-collapse">
                 <thead>
@@ -344,11 +353,11 @@ import { Dropdown } from 'floating-vue';
                     <tr
                         v-for="(item, index) in items"
                         :key="index"
-                        class="border-b border-gray-200"
+                        class="border-b border-foreground/20"
                     >
                         <td class="py-2 pr-4">{{ formatTime(item.time) }}</td>
                         <td class="py-2 pr-4 font-medium">{{ item.title }}</td>
-                        <td class="py-2 text-gray-600">{{ item.description }}</td>
+                        <td class="py-2 text-foreground/80">{{ item.description }}</td>
                     </tr>
                 </tbody>
             </table>
