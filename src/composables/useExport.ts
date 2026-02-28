@@ -14,11 +14,14 @@ export const useExport = (): {
         await nextTick();
         if (!outputEl.value) return;
 
+        const { offsetWidth, offsetHeight } = outputEl.value;
         const clone = outputEl.value.cloneNode(true) as HTMLElement;
         clone.style.position = 'fixed';
         clone.style.top = '-9999px';
         clone.style.left = '-9999px';
-        clone.style.width = `${outputEl.value.offsetWidth}px`;
+        clone.style.width = `${offsetWidth}px`;
+        clone.style.height = `${offsetHeight}px`;
+        clone.style.borderRadius = '0';
         document.body.appendChild(clone);
 
         const allOriginal = Array.from(outputEl.value.querySelectorAll('*')) as HTMLElement[];
