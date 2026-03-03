@@ -13,7 +13,7 @@ import ThemeOverride from '@/components/ThemeOverride.vue'
             <PaletteDropdown />
         </header>
 
-        <div class="flex flex-1 flex-col gap-4 p-4 md:grid md:grid-cols-[1fr_2fr]">
+        <div class="flex flex-1 flex-col gap-4 p-4 md:grid md:grid-cols-[minmax(480px,1fr)_2fr]">
             <RunsheetInput />
             <RunsheetOutput />
         </div>

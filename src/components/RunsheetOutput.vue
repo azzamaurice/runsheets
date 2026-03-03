@@ -53,11 +53,11 @@ const formatTime = (time: string): string => {
                     </div>
                     <div class="flex flex-col justify-center gap-[4cqw]">
                         <div
-                            class="text-secondary flex items-center justify-between text-[calc(6cqw/max(1,var(--item-count)/5))] font-semibold">
+                            class="text-secondary flex items-center justify-between text-[6cqw] font-semibold">
                             {{ formattedDate() }}
                             <div
                                 v-html="logo"
-                                class="[&>svg]:size-[calc(6cqw/max(1,var(--item-count)/5))]" />
+                                class="[&>svg]:size-[8cqw]" />
                         </div>
 
                         <ul class="flex flex-col gap-[calc(3cqw/max(1,var(--item-count)/5))]">
